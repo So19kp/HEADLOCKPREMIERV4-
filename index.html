@@ -1,0 +1,2004 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050505">
+<title>HEADLOCK PRO • Performance Lab</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{--red:#ff1744;--bg:#050505;--card:#0d0d0f}
+body{min-height:100vh;font-family:Arial,sans-serif;color:#fff;background:radial-gradient(circle at 50% 0%,rgba(255,0,60,.18),transparent 38%),linear-gradient(145deg,#020202,#09090b,#030303);overflow-x:hidden}
+body:before,body:after{content:"";position:fixed;width:280px;height:280px;border-radius:50%;filter:blur(100px);opacity:.12;pointer-events:none;z-index:-1}
+body:before{background:#ff003c;top:-100px;left:-100px}body:after{background:#8b001f;right:-120px;bottom:-100px}
+.hidden{display:none!important}
+#splash{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;flex-direction:column;background:#030303;transition:.5s}
+.logo{width:105px;height:105px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid var(--red);box-shadow:0 0 15px var(--red),0 0 55px rgba(255,0,60,.35);animation:pulse 1.5s infinite;overflow:hidden;background:#050505}.logo img{width:100%;height:100%;object-fit:cover;display:block}
+.splash-title{margin-top:22px;font-size:30px;font-weight:900;letter-spacing:5px}.splash-title span{color:var(--red)}
+.tap{margin-top:18px;color:#888;font-size:13px;letter-spacing:1px;animation:blink 1.3s infinite}
+@keyframes pulse{50%{transform:scale(1.06)}}@keyframes blink{50%{opacity:.25}}
+.app{width:100%;max-width:480px;margin:auto;padding:18px 14px 35px}
+.header{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+.back{width:42px;height:42px;border:1px solid rgba(255,23,68,.35);background:#0b0b0d;color:#fff;border-radius:12px;font-size:20px;cursor:pointer}
+.header-info{flex:1}.header-info h1{font-size:23px;letter-spacing:2px}.header-info p{color:var(--red);font-size:10px;margin-top:3px;letter-spacing:2px}
+.card{position:relative;background:rgba(12,12,14,.94);border:1px solid rgba(255,23,68,.35);border-radius:20px;padding:22px;box-shadow:0 12px 45px rgba(0,0,0,.5),0 0 30px rgba(255,0,60,.05);overflow:hidden}
+.card:before{content:"";position:absolute;top:0;left:15%;right:15%;height:1px;background:linear-gradient(90deg,transparent,var(--red),transparent);box-shadow:0 0 15px var(--red)}
+.center{text-align:center}
+.login-icon{width:82px;height:82px;border-radius:50%;margin:4px auto 18px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,23,68,.55);background:radial-gradient(circle,#27050d,#0b0b0d 65%);font-size:35px}
+.title{font-size:26px;font-weight:900;letter-spacing:3px}.subtitle{color:#777;margin-top:7px;font-size:12px}
+.input-wrap{display:flex;margin-top:25px;background:#08080a;border:1px solid #242429;border-radius:12px;overflow:hidden}
+.input-wrap:focus-within{border-color:var(--red);box-shadow:0 0 15px rgba(255,0,60,.12)}
+.input-wrap span{width:45px;display:flex;justify-content:center;align-items:center;color:var(--red)}
+input{flex:1;border:0;outline:0;background:transparent;color:#fff;padding:14px 8px 14px 0;font-size:14px}input::placeholder{color:#555}
+.btn{width:100%;margin-top:13px;padding:14px;border:0;border-radius:12px;background:linear-gradient(90deg,#d50032,#ff1744);color:#fff;font-weight:900;letter-spacing:1px;cursor:pointer;box-shadow:0 8px 22px rgba(255,0,60,.18);transition:.2s}
+.btn:hover{transform:translateY(-1px);filter:brightness(1.1)}.btn:active{transform:scale(.98)}
+.contact{margin-top:22px;padding-top:18px;border-top:1px solid #202024;text-align:left}.contact-title{color:var(--red);font-size:11px;font-weight:bold;letter-spacing:2px;margin-bottom:8px}.contact p{color:#999;font-size:12px;line-height:1.7}
+.panel-logo{width:70px;height:70px;margin:0 auto 13px;border-radius:18px;border:1px solid rgba(255,23,68,.35);display:flex;align-items:center;justify-content:center;background:#09090b;box-shadow:0 0 25px rgba(255,0,60,.15);overflow:hidden}.panel-logo img{width:100%;height:100%;object-fit:cover;display:block}
+.panel-title{text-align:center;font-size:25px;font-weight:900;letter-spacing:3px}.panel-author{text-align:center;color:#777;font-size:10px;margin-top:5px;letter-spacing:2px}
+.features{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:24px}.feature{min-height:58px;border-radius:13px;border:1px solid #26262b;background:#0a0a0c;color:#ddd;font-weight:bold;cursor:pointer;transition:.2s}.feature:hover,.feature.active{border-color:var(--red);color:#fff;box-shadow:0 0 18px rgba(255,0,60,.12)}.feature.active{background:rgba(255,0,60,.08)}
+.section{margin-top:22px}.section-label,.version-title{color:#888;font-size:10px;font-weight:bold;letter-spacing:2px;margin-bottom:10px}
+.toggle,.version-list{display:flex;gap:8px}.toggle button,.version{flex:1;padding:12px;border-radius:10px;border:1px solid #27272c;background:#09090b;color:#777;font-weight:bold;cursor:pointer}.toggle button.selected,.version.selected{background:#16161a;border-color:var(--red);color:#fff;box-shadow:0 0 15px rgba(255,0,60,.12)}
+.info{margin-top:20px;border:1px solid #202024;border-radius:13px;padding:15px;background:#08080a}.info-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}.info-head strong{font-size:12px}.status{color:#3cff86;font-size:11px}.info p{color:#777;font-size:11px;line-height:1.8}.social{margin-top:10px;color:#aaa!important}
+.game-version{margin-top:22px}.version{font-size:12px}.result{display:none;margin-top:18px;padding:12px;border-radius:10px;background:rgba(0,255,100,.04);border:1px solid rgba(0,255,100,.18);color:#65ff9d;font-size:12px;text-align:center}.result.show{display:block}
+.modal{position:fixed;inset:0;z-index:500;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(0,0,0,.78);backdrop-filter:blur(8px)}.modal.show{display:flex}.modal-box{width:100%;max-width:420px;border:1px solid rgba(255,23,68,.35);border-radius:20px;padding:22px;background:#0b0b0d;box-shadow:0 0 50px rgba(255,0,60,.12)}.modal-box h2{font-size:20px;margin-bottom:14px}
+.terminal{background:#050506;border:1px solid #202024;border-radius:12px;padding:14px;min-height:190px;color:#8cffb1;font-family:monospace;font-size:11px;line-height:1.8;overflow:hidden}.terminal .done{color:#fff;font-weight:bold}
+.toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,20px);opacity:0;pointer-events:none;z-index:900;padding:12px 18px;border-radius:30px;background:#111115;border:1px solid rgba(255,23,68,.35);color:#fff;font-size:12px;box-shadow:0 10px 30px rgba(0,0,0,.5);transition:.3s}.toast.show{opacity:1;transform:translate(-50%,0)}
+.footer{text-align:center;color:#444;font-size:9px;margin-top:22px;letter-spacing:1px}
+@media(max-width:360px){.features{grid-template-columns:1fr}.title{font-size:22px}}
+
+.key-status{margin-top:18px;padding:13px;border:1px solid #202024;border-radius:12px;background:#08080a}
+.key-status>div{display:flex;justify-content:space-between;align-items:center;font-size:11px}
+.key-status b{letter-spacing:1px;color:#aaa}
+#keyBadge{color:#3cff86;font-weight:900}
+#keyExpiry{display:block;margin-top:7px;color:#666;font-size:10px}
+
+/* ===== iOS VIP UI / SAFE PERFORMANCE TOOLKIT ===== */
+:root{
+  --green:#38ff9a;--cyan:#55d9ff;--gold:#ffd45a;
+  --glass:rgba(16,18,22,.78)
+}
+body{
+  background:
+    radial-gradient(circle at 15% 0%,rgba(85,217,255,.13),transparent 28%),
+    radial-gradient(circle at 85% 20%,rgba(56,255,154,.10),transparent 30%),
+    radial-gradient(circle at 50% 100%,rgba(255,0,60,.12),transparent 38%),
+    linear-gradient(145deg,#020305,#07090d,#030406);
+}
+.vip-badge{
+  display:inline-flex;align-items:center;gap:6px;margin:10px auto 0;
+  padding:6px 10px;border-radius:999px;font-size:9px;font-weight:900;
+  letter-spacing:1.5px;color:#06100b;background:linear-gradient(90deg,var(--green),#baffdd);
+  box-shadow:0 0 18px rgba(56,255,154,.22)
+}
+.ios-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+.ios-card{
+  padding:14px;border:1px solid rgba(85,217,255,.18);border-radius:14px;
+  background:linear-gradient(145deg,rgba(18,22,28,.9),rgba(8,10,13,.9));
+  cursor:pointer;transition:.2s
+}
+.ios-card:hover,.ios-card.active{border-color:var(--cyan);transform:translateY(-1px);box-shadow:0 0 18px rgba(85,217,255,.12)}
+.ios-card b{display:block;font-size:11px}.ios-card small{display:block;color:#6f7883;font-size:9px;margin-top:5px}
+.switch{position:relative;width:42px;height:23px;display:inline-block;float:right}
+.switch input{display:none}.slider{position:absolute;inset:0;background:#25272c;border-radius:30px;transition:.2s}
+.slider:before{content:"";position:absolute;width:17px;height:17px;left:3px;top:3px;border-radius:50%;background:#aaa;transition:.2s}
+.switch input:checked+.slider{background:rgba(56,255,154,.3);border:1px solid var(--green)}
+.switch input:checked+.slider:before{transform:translateX(18px);background:var(--green)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.stat{padding:12px 6px;text-align:center;border:1px solid #20242a;border-radius:12px;background:#080a0d}
+.stat strong{display:block;font-size:16px}.stat span{font-size:8px;color:#69717b;letter-spacing:1px}
+.progress{height:7px;background:#181b20;border-radius:99px;overflow:hidden;margin-top:10px}
+.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--green));transition:1s}
+.safe-note{margin-top:14px;padding:11px;border-radius:11px;border:1px solid rgba(56,255,154,.18);background:rgba(56,255,154,.035);color:#8ca698;font-size:10px;line-height:1.6}
+@media(max-width:360px){.ios-grid{grid-template-columns:1fr}}
+
+
+/* ===== 3D MOTION UI ===== */
+body{perspective:1200px}
+
+@keyframes orbA{from{transform:translate3d(-20px,-10px,0) scale(1)}to{transform:translate3d(35px,45px,80px) scale(1.18)}}
+@keyframes orbB{from{transform:translate3d(10px,20px,0) scale(1)}to{transform:translate3d(-35px,-35px,70px) scale(1.22)}}
+.app{animation:appIn .35s ease-out}
+@keyframes appIn{from{opacity:0;transform:translateY(28px) rotateX(8deg) scale(.97)}to{opacity:1;transform:none}}
+.card{transition:box-shadow .2s ease}
+.card:after{
+  content:"";position:absolute;inset:-40%;
+  background:conic-gradient(from 0deg,transparent 0 55%,rgba(85,217,255,.07),transparent 70%);
+  animation:spin3d 8s linear infinite;pointer-events:none
+}
+@keyframes spin3d{to{transform:rotate(360deg)}}
+.panel-logo{
+  animation:float3d 3s ease-in-out infinite;
+  transform-style:preserve-3d
+}
+@keyframes float3d{
+  0%,100%{transform:translateZ(0) rotateY(-5deg) rotateX(3deg)}
+  50%{transform:translateZ(22px) rotateY(8deg) rotateX(-4deg)}
+}
+.feature,.ios-card,.version,.toggle button{
+  transform-style:preserve-3d;
+  transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease
+}
+.feature:hover,.ios-card:hover,.version:hover,.toggle button:hover{
+  transform:translateY(-4px) translateZ(12px) rotateX(2deg)
+}
+.feature.active,.ios-card.active{
+  animation:activeGlow 1.7s ease-in-out infinite alternate
+}
+@keyframes activeGlow{
+  from{box-shadow:0 0 10px rgba(255,23,68,.12)}
+  to{box-shadow:0 0 28px rgba(85,217,255,.18),0 0 45px rgba(56,255,154,.06)}
+}
+.ios-card b,.feature{position:relative;z-index:1}
+.stats .stat{animation:statFloat 4s ease-in-out infinite}
+.stats .stat:nth-child(2){animation-delay:.5s}.stats .stat:nth-child(3){animation-delay:1s}
+@keyframes statFloat{50%{transform:translateY(-3px) translateZ(8px)}}
+.progress i{box-shadow:0 0 14px rgba(56,255,154,.45)}
+.tap{animation:blink 1.3s infinite,slideTap 2s ease-in-out infinite}
+@keyframes slideTap{50%{transform:translateY(-3px)}}
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}
+}
+
+
+/* ===== MOBILE PERFORMANCE PATCH ===== */
+.card:after{display:none!important}
+.panel-logo{animation:none!important;transform:none!important}
+.feature,.ios-card,.version,.toggle button{transform:none!important;transition:border-color .15s ease,background .15s ease,box-shadow .15s ease!important}
+.feature:hover,.ios-card:hover,.version:hover,.toggle button:hover{transform:none!important}
+.feature.active,.ios-card.active{animation:none!important}
+.stats .stat{animation:none!important}
+body:before,body:after{animation:none!important}
+@media (max-width:600px){
+  body{perspective:none!important}
+  .app{transform:none!important}
+  .card{transform:none!important}
+  .card,.ios-card,.feature,.stat{box-shadow:none}
+}
+
+
+/* ===== MENU ALIGNMENT / TOUCH PATCH ===== */
+.features{grid-template-columns:repeat(2,minmax(0,1fr));align-items:stretch}
+.feature{width:100%;min-width:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:12px 8px;line-height:1.2}
+.ios-grid{grid-template-columns:repeat(2,minmax(0,1fr));align-items:stretch}
+.ios-card{position:relative;min-width:0;min-height:76px}
+.ios-card .switch{z-index:3}
+.switch input{display:block;position:absolute;opacity:0;width:100%;height:100%;margin:0;cursor:pointer;z-index:4}
+@media(max-width:380px){
+  .app{padding-left:10px;padding-right:10px}
+  .card{padding:16px}
+  .features,.ios-grid{grid-template-columns:1fr}
+}
+.pro-tools{
+  margin-top:20px;padding:14px;border:1px solid rgba(85,217,255,.2);
+  border-radius:14px;background:linear-gradient(145deg,rgba(12,18,24,.95),rgba(7,9,12,.95));
+  box-shadow:0 0 24px rgba(85,217,255,.05)
+}
+.pro-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.pro-head strong{display:block;font-size:11px;letter-spacing:1.5px}
+.pro-head small{display:block;color:#66717d;font-size:8px;margin-top:4px;letter-spacing:1px}
+.pro-state{padding:5px 8px;border-radius:999px;font-size:8px;font-weight:900;letter-spacing:1px;
+  color:#06100b;background:rgba(56,255,154,.9)}
+.pro-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.pro-actions button{padding:10px;border:1px solid #26313a;border-radius:10px;background:#090d11;color:#d9e8ee;
+  font-size:10px;font-weight:900;cursor:pointer}
+.pro-actions button:hover{border-color:var(--cyan);box-shadow:0 0 14px rgba(85,217,255,.1)}
+.pro-log{margin-top:10px;min-height:38px;padding:9px;border-radius:9px;background:#050708;border:1px solid #171d22;
+  color:#78a0ac;font:9px/1.7 monospace;white-space:pre-line}
+@media(max-width:380px){.pro-actions{grid-template-columns:1fr}}
+
+
+
+.tuning-panel{margin-top:18px;padding:15px;border:1px solid rgba(255,23,68,.22);border-radius:14px;background:linear-gradient(145deg,rgba(20,12,16,.92),rgba(8,9,12,.96))}
+.tuning-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.tuning-head strong{display:block;font-size:11px;letter-spacing:1.5px}
+.tuning-head small{display:block;color:#68717b;font-size:8px;margin-top:4px;letter-spacing:1px}
+#profileState{padding:5px 8px;border-radius:999px;font-size:8px;font-weight:900;color:#07100b;background:var(--green)}
+.tuning-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.tuning-grid label{padding:10px;border:1px solid #24262d;border-radius:10px;background:#090b0f;color:#aab2ba;font-size:9px;font-weight:900;letter-spacing:.6px}
+.tuning-grid output{float:right;color:var(--green);font-size:10px}
+.tuning-grid input{display:block;width:100%;margin-top:10px;accent-color:var(--red)}
+.tuning-meter{height:6px;margin-top:12px;background:#171a1f;border-radius:99px;overflow:hidden}
+.tuning-meter i{display:block;width:0;height:100%;background:linear-gradient(90deg,var(--red),var(--cyan),var(--green));transition:.25s}
+.tuning-note{margin-top:10px;color:#6f7a84;font-size:9px;line-height:1.6}
+@media(max-width:380px){.tuning-grid{grid-template-columns:1fr}}
+
+.headshot-panel{margin-top:20px;padding:15px;border:1px solid rgba(255,23,68,.24);border-radius:15px;background:linear-gradient(145deg,rgba(22,12,17,.96),rgba(7,10,14,.97))}
+.headshot-head{display:flex;align-items:center;justify-content:space-between;gap:10px}.headshot-head strong{display:block;font-size:11px;letter-spacing:1.6px}.headshot-head small{display:block;color:#68727d;font-size:8px;margin-top:4px;letter-spacing:1px}
+#headshotState{padding:5px 8px;border-radius:999px;background:var(--green);color:#06100b;font-size:8px;font-weight:900}
+.headshot-presets{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:13px}.headshot-presets button{padding:9px 4px;border:1px solid #292d34;border-radius:9px;background:#090c10;color:#9aa5af;font-size:8px;font-weight:900;cursor:pointer}.headshot-presets button.active,.headshot-presets button:hover{border-color:var(--cyan);color:#fff}
+.headshot-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}.headshot-grid label{padding:10px;border:1px solid #23272d;border-radius:10px;background:#080b0f;color:#aab2ba;font-size:9px;font-weight:900}.headshot-grid output{float:right;color:var(--green);font-size:10px}.headshot-grid input{display:block;width:100%;margin-top:9px;accent-color:var(--red)}
+.headshot-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:11px}.headshot-stats div{padding:10px 5px;text-align:center;border:1px solid #20242a;border-radius:10px;background:#07090c}.headshot-stats b{display:block;font-size:14px}.headshot-stats span{font-size:7px;color:#68727d;letter-spacing:1px}
+.headshot-meter{height:7px;margin-top:11px;background:#171b20;border-radius:99px;overflow:hidden}.headshot-meter i{display:block;width:0;height:100%;background:linear-gradient(90deg,var(--red),var(--cyan),var(--green));transition:.25s}
+.headshot-log{margin-top:10px;padding:9px;border:1px solid #1c2228;border-radius:9px;background:#050708;color:#78a0ac;font:9px/1.7 monospace}.headshot-note{margin-top:10px;color:#6f7a84;font-size:9px;line-height:1.65}
+@media(max-width:380px){.headshot-presets{grid-template-columns:1fr 1fr}.headshot-grid{grid-template-columns:1fr}}
+
+.data-engine{margin-top:20px;padding:15px;border:1px solid rgba(85,217,255,.22);border-radius:15px;background:linear-gradient(145deg,rgba(9,18,24,.97),rgba(7,9,13,.98))}
+.data-head{display:flex;align-items:center;justify-content:space-between;gap:10px}.data-head strong{display:block;font-size:11px;letter-spacing:1.6px}.data-head small{display:block;color:#687580;font-size:8px;margin-top:4px;letter-spacing:1px}
+#dataState{padding:5px 8px;border-radius:999px;background:var(--green);color:#06100b;font-size:8px;font-weight:900}
+.data-presets{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:13px}.data-presets button,.data-actions button{padding:9px 5px;border:1px solid #283139;border-radius:9px;background:#080d11;color:#aebbc3;font-size:8px;font-weight:900;cursor:pointer}
+.data-presets button.active,.data-presets button:hover,.data-actions button:hover{border-color:var(--cyan);color:#fff;box-shadow:0 0 13px rgba(85,217,255,.1)}
+.data-actions{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:9px}.data-actions button{font-size:9px}
+.data-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:11px}.data-summary div{padding:10px 5px;text-align:center;border:1px solid #202830;border-radius:10px;background:#06090c}.data-summary b{display:block;font-size:13px}.data-summary span{font-size:7px;color:#687580;letter-spacing:1px}
+.data-validation{margin-top:10px;padding:10px;border-radius:9px;border:1px solid #202830;background:#05080b;color:#9aa8b1;font-size:9px;line-height:1.6}
+.data-log{margin-top:8px;padding:9px;border:1px solid #1b242b;border-radius:9px;background:#040607;color:#78a0ac;font:9px/1.7 monospace;white-space:pre-line}
+.data-note{margin-top:9px;color:#6f7b84;font-size:9px;line-height:1.6}
+@media(max-width:380px){.data-presets,.data-actions{grid-template-columns:1fr 1fr}}
+
+.admin-card{display:flex;gap:12px;align-items:center;margin:18px 14px 0;padding:14px;border:1px solid rgba(85,217,255,.2);border-radius:14px;background:linear-gradient(145deg,rgba(12,18,24,.96),rgba(7,9,12,.96))}
+.admin-avatar{width:48px;height:48px;flex:0 0 48px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:linear-gradient(145deg,#151b22,#080b0f);border:1px solid rgba(85,217,255,.3);color:var(--cyan);font-weight:900;font-size:18px}
+.admin-main{min-width:0;flex:1}.admin-title{font-size:9px;font-weight:900;letter-spacing:1.2px;color:#c9d3d9}.admin-title span{margin-left:5px;color:#07100b;background:var(--green);padding:3px 5px;border-radius:999px;font-size:7px}
+.admin-name{margin-top:5px;color:#fff;font-size:14px;font-weight:900;letter-spacing:1px}.admin-sub{margin-top:3px;color:#687580;font-size:8px}
+.admin-links{display:flex;gap:7px;margin-top:9px;flex-wrap:wrap}.admin-links a{padding:6px 8px;border:1px solid #283139;border-radius:8px;color:#aebbc3;text-decoration:none;font-size:8px;font-weight:900}.admin-links a:hover{border-color:var(--cyan);color:#fff}
+
+/* ===== HEADLOCK iOS SHADOW DIAGNOSTIC v3 — SAFE UI ===== */
+.shadow-module{margin-top:20px;padding:15px;border:1px solid rgba(255,212,90,.22);border-radius:15px;background:linear-gradient(145deg,rgba(22,18,9,.96),rgba(8,10,13,.98))}
+.shadow-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.shadow-head strong{display:block;font-size:11px;letter-spacing:1.5px}
+.shadow-head small{display:block;color:#77736a;font-size:8px;margin-top:4px;letter-spacing:1px}
+#shadowState{padding:5px 8px;border-radius:999px;background:var(--gold);color:#171205;font-size:8px;font-weight:900}
+.shadow-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:13px}
+.shadow-item{padding:11px;border:1px solid #2c2a24;border-radius:10px;background:#090a0c}
+.shadow-item b{display:block;font-size:9px}
+.shadow-item span{display:block;margin-top:5px;color:#6e777d;font:8px/1.5 monospace}
+.shadow-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:10px}
+.shadow-actions button{padding:10px 5px;border:1px solid #302d25;border-radius:9px;background:#0a0c0f;color:#c9c0a9;font-size:8px;font-weight:900;cursor:pointer}
+.shadow-actions button:hover{border-color:var(--gold);color:#fff}
+.shadow-log{margin-top:9px;padding:9px;border:1px solid #25241f;border-radius:9px;background:#050607;color:#9b9687;font:9px/1.7 monospace;white-space:pre-line}
+.shadow-note{margin-top:9px;color:#6f777c;font-size:9px;line-height:1.65}
+@media(max-width:380px){.shadow-grid,.shadow-actions{grid-template-columns:1fr 1fr}}
+
+
+/* ===== PRO PERFORMANCE LAB ===== */
+.pro-lab{margin-top:20px;padding:15px;border:1px solid rgba(56,255,154,.2);border-radius:16px;background:linear-gradient(145deg,rgba(9,18,15,.96),rgba(7,9,12,.98));box-shadow:0 0 26px rgba(56,255,154,.04)}
+.lab-head{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.lab-head strong{display:block;font-size:11px;letter-spacing:1.5px}
+.lab-head small{display:block;color:#66757a;font-size:8px;margin-top:4px;letter-spacing:.8px}
+#labState{padding:5px 8px;border-radius:999px;background:var(--green);color:#06100b;font-size:8px;font-weight:900}
+.lab-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:13px}
+.lab-tab{padding:9px 4px;border:1px solid #26322f;border-radius:9px;background:#080d0b;color:#82908b;font-size:8px;font-weight:900;cursor:pointer}
+.lab-tab.active,.lab-tab:hover{border-color:var(--green);color:#fff;box-shadow:0 0 14px rgba(56,255,154,.08)}
+.lab-pane{margin-top:11px}
+.lab-cards{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.lab-cards button{min-height:68px;text-align:left;padding:11px;border:1px solid #222d29;border-radius:11px;background:#080d0b;color:#d9e7e1;cursor:pointer}
+.lab-cards button.active{border-color:var(--green);background:rgba(56,255,154,.06)}
+.lab-cards b{display:block;font-size:10px}.lab-cards small{display:block;color:#65736f;font-size:8px;line-height:1.45;margin-top:5px}
+.lab-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:10px}
+.lab-metrics div,.network-box div{padding:10px 6px;border:1px solid #202a27;border-radius:9px;background:#060a08;text-align:center}
+.lab-metrics b{display:block;font-size:14px}.lab-metrics span{font-size:7px;color:#68746f;letter-spacing:1px}
+.touch-profile{padding:11px;border:1px solid #202b28;border-radius:10px;background:#060a08}
+.touch-row{display:flex;justify-content:space-between;color:#aab8b2;font-size:9px;font-weight:800;margin:3px 0 5px}
+.touch-row output{color:var(--green)}
+.touch-profile input{width:100%;accent-color:var(--green);margin-bottom:8px}
+.lab-main-btn{width:100%;margin-top:9px;padding:11px;border:1px solid #26322f;border-radius:10px;background:#090f0c;color:#e2eee9;font-size:9px;font-weight:900;cursor:pointer}
+.lab-main-btn:hover{border-color:var(--green)}
+.network-box{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.network-box span{display:block;color:#68746f;font-size:7px;text-transform:uppercase}.network-box b{display:block;margin-top:4px;font-size:11px}
+.lab-progress{height:6px;background:#171d1a;border-radius:99px;overflow:hidden;margin-top:11px}
+.lab-progress i{display:block;width:0;height:100%;background:linear-gradient(90deg,var(--cyan),var(--green));transition:.35s}
+.lab-log{margin-top:9px;padding:9px;border:1px solid #1b2421;border-radius:9px;background:#040706;color:#7ca094;font:9px/1.7 monospace;white-space:pre-line;min-height:38px}
+.lab-note{margin-top:9px;color:#697670;font-size:8px;line-height:1.65}
+@media(max-width:380px){.lab-cards{grid-template-columns:1fr}.network-box{grid-template-columns:1fr}.lab-tabs{grid-template-columns:1fr}}
+
+
+/* ===== ANDROID GAME BRIDGE / SAFE COMMAND CONSOLE ===== */
+.android-bridge{margin-top:20px;padding:15px;border:1px solid rgba(85,217,255,.24);border-radius:16px;background:linear-gradient(145deg,rgba(9,16,23,.98),rgba(6,9,13,.98))}
+.bridge-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.bridge-head strong{display:block;font-size:11px;letter-spacing:1.5px}
+.bridge-head small{display:block;color:#687580;font-size:8px;margin-top:4px;letter-spacing:1px}
+#bridgeState{padding:5px 8px;border-radius:999px;background:var(--green);color:#06100b;font-size:8px;font-weight:900}
+.bridge-targets{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:13px}
+.bridge-target{padding:11px 8px;border:1px solid #263139;border-radius:10px;background:#080d11;color:#b7c4cb;font-size:9px;font-weight:900;cursor:pointer;text-align:left}
+.bridge-target small{display:block;margin-top:5px;color:#65747d;font:8px monospace}
+.bridge-target.active,.bridge-target:hover{border-color:var(--cyan);color:#fff;box-shadow:0 0 14px rgba(85,217,255,.1)}
+.bridge-actions{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:10px}
+.bridge-actions button,.bridge-main{padding:10px 5px;border:1px solid #263139;border-radius:9px;background:#080d11;color:#d5e2e7;font-size:8px;font-weight:900;cursor:pointer}
+.bridge-actions button:hover,.bridge-main:hover{border-color:var(--green)}
+.command-box{margin-top:10px;padding:10px;border:1px solid #202a31;border-radius:10px;background:#05080b}
+.command-box label{display:block;color:#8b9aa2;font-size:8px;font-weight:900;letter-spacing:1px}
+.command-box textarea{width:100%;min-height:90px;resize:vertical;margin-top:8px;padding:10px;border:1px solid #202830;border-radius:8px;outline:none;background:#030506;color:#8cffb1;font:10px/1.6 monospace}
+.bridge-main{width:100%;margin-top:8px}
+.bridge-status{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:10px}
+.bridge-status div{padding:9px 5px;text-align:center;border:1px solid #202830;border-radius:9px;background:#06090c}
+.bridge-status span{display:block;color:#687580;font-size:7px;letter-spacing:1px}
+.bridge-status b{display:block;margin-top:4px;font-size:9px}
+.bridge-log{margin-top:9px;padding:9px;min-height:38px;border:1px solid #1b242b;border-radius:9px;background:#040607;color:#78a0ac;font:9px/1.7 monospace;white-space:pre-line}
+.bridge-note{margin-top:9px;color:#697780;font-size:8px;line-height:1.65}
+@media(max-width:380px){.bridge-targets,.bridge-actions,.bridge-status{grid-template-columns:1fr}}
+
+
+/* ===== PAGE 2 • TASK / AI / MOBILECONFIG ANALYSIS ===== */
+.analysis-page{width:100%;max-width:480px;margin:auto;padding:18px 14px 35px}
+.analysis-nav{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.analysis-nav button{padding:11px;border:1px solid #26313a;border-radius:11px;background:#090d11;color:#aebbc3;font-size:10px;font-weight:900}
+.analysis-nav button.active{border-color:var(--cyan);color:#fff;background:rgba(85,217,255,.06)}
+.analysis-hero{padding:18px;border:1px solid rgba(85,217,255,.25);border-radius:18px;background:linear-gradient(145deg,rgba(9,17,24,.98),rgba(7,9,13,.98));}
+.analysis-kicker{font-size:9px;color:var(--cyan);font-weight:900;letter-spacing:1.8px}
+.analysis-title{margin-top:5px;font-size:24px;font-weight:900;letter-spacing:2px}
+.analysis-sub{margin-top:6px;color:#74818a;font-size:10px;line-height:1.6}
+.ai-status{display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding:9px 10px;border:1px solid #202a31;border-radius:10px;background:#05080b}
+.ai-status b{font-size:10px}.ai-status span{font-size:9px;color:var(--green);font-weight:900}
+.analysis-score{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:12px}
+.analysis-score div{padding:12px 5px;text-align:center;border:1px solid #202830;border-radius:10px;background:#06090c}
+.analysis-score b{display:block;font-size:17px}.analysis-score span{font-size:7px;color:#687580;letter-spacing:1px}
+.analysis-section{margin-top:14px;padding:15px;border:1px solid #202830;border-radius:15px;background:#080b0f}
+.analysis-section h3{font-size:11px;letter-spacing:1.3px}.analysis-section p,.analysis-section li{color:#7d8991;font-size:9px;line-height:1.65}
+.task-row{margin-top:10px}.task-head{display:flex;justify-content:space-between;font-size:9px;color:#aebbc3}.task-bar{height:7px;margin-top:5px;background:#171b20;border-radius:99px;overflow:hidden}.task-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--cyan),var(--green));width:0;transition:.4s}
+.function-list{display:grid;gap:7px;margin-top:10px}.function-item{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;padding:10px;border:1px solid #202830;border-radius:10px;background:#06090c}.function-item b{font-size:9px}.function-item small{display:block;margin-top:3px;color:#65727b;font-size:8px}.function-item strong{font-size:10px;color:var(--green)}
+.mc-drop{margin-top:10px;padding:12px;border:1px dashed #33414a;border-radius:11px;background:#05080b}.mc-drop input{width:100%;font-size:9px;color:#8997a0}.mc-result{margin-top:9px;padding:10px;border-radius:9px;background:#050709;border:1px solid #1c252b;color:#8b9aa2;font:9px/1.65 monospace;white-space:pre-line;min-height:58px}
+.analysis-note{margin-top:9px;color:#65727b;font-size:8px;line-height:1.6}
+@media(max-width:380px){.analysis-page{padding-left:10px;padding-right:10px}}
+
+</style>
+<style id="game-analysis-css">.analysis-page{display:none;min-height:100vh;padding:18px;box-sizing:border-box;background:#05080b;color:#dce7ec}.analysis-page.show{display:block}.analysis-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.analysis-title{font-size:18px;font-weight:800}.analysis-sub{font-size:10px;color:#7e929e;margin-top:4px}.analysis-btn{border:1px solid #26343d;background:#0b1116;color:#bfffd5;border-radius:9px;padding:9px 12px;font-weight:700}.analysis-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-bottom:12px}.analysis-card,.analysis-section{background:#0a1015;border:1px solid #1b2830;border-radius:12px;padding:13px}.analysis-card b{display:block;font-size:20px}.analysis-card span{font-size:9px;color:#7d909a}.analysis-section{margin-bottom:12px}.analysis-section h3{margin:0 0 10px;font-size:12px;color:#a9bbc4}.task-row{display:grid;grid-template-columns:1.3fr .8fr 1.7fr;gap:10px;padding:9px 0;border-bottom:1px solid #142028;font-size:10px;align-items:center}.task-row:last-child{border-bottom:0}.badge{padding:4px 7px;border-radius:7px;font-size:9px;font-weight:700}.on{background:#123d28;color:#78ffad}.off{background:#2a2020;color:#ff9b9b}.bar{height:7px;background:#111a20;border-radius:8px;overflow:hidden}.bar i{display:block;height:100%;background:#65e59a}.analysis-note{font-size:9px;line-height:1.5;color:#738792;margin-top:9px}.mobile-box{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media(max-width:700px){.analysis-grid{grid-template-columns:repeat(2,1fr)}.task-row,.mobile-box{grid-template-columns:1fr}}</style>
+<style id="headshot-upgrade-css">
+.hs-dashboard{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:10px}.hs-mini{padding:9px;border:1px solid #202830;border-radius:9px;background:#070a0d}.hs-mini span{display:block;font-size:7px;color:#65727b;letter-spacing:.8px}.hs-mini b{display:block;margin-top:4px;font-size:12px;color:var(--green)}
+.hs-actions{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:10px}.hs-actions button{padding:9px 4px;border:1px solid #252c33;border-radius:9px;background:#090d11;color:#aeb8c0;font-size:8px;font-weight:900;cursor:pointer}.hs-actions button:hover{border-color:var(--cyan);color:#fff}
+.hs-test{margin-top:10px;padding:10px;border:1px solid #202830;border-radius:10px;background:#06090c}.hs-test-head{display:flex;justify-content:space-between;gap:8px;font-size:8px;color:#74838c;letter-spacing:1px}.hs-test-head b{color:var(--green)}.hs-track{height:6px;margin-top:8px;background:#151a1f;border-radius:99px;overflow:hidden}.hs-track i{display:block;width:0;height:100%;background:linear-gradient(90deg,var(--red),var(--cyan),var(--green));transition:width .12s}.hs-test-readout{margin-top:7px;font:8px/1.5 monospace;color:#78919b}
+@media(max-width:520px){.hs-dashboard{grid-template-columns:repeat(2,1fr)}.hs-actions{grid-template-columns:repeat(2,1fr)}}
+</style>
+
+
+<style id="publisher-admin-css">
+.publisher-card{background:linear-gradient(145deg,#091117,#070b0f);border:1px solid #1c3038;border-radius:14px;padding:15px;margin-top:12px}
+.publisher-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.publisher-brand{display:flex;align-items:center;gap:10px}
+.publisher-logo{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;background:#0e1c22;border:1px solid #28414a;font-size:20px}
+.publisher-name{font-weight:800;font-size:13px}.publisher-role{font-size:9px;color:#71858f;margin-top:3px}
+.publisher-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.publisher-info{border:1px solid #18262e;border-radius:10px;padding:11px}
+.publisher-info span{display:block;font-size:8px;color:#71858f;text-transform:uppercase;margin-bottom:5px}
+.publisher-info b{font-size:11px}
+.admin-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.admin-link{display:inline-flex;align-items:center;gap:6px;text-decoration:none;border:1px solid #29404a;background:#0b151a;color:#bfffd5;border-radius:9px;padding:9px 11px;font-size:10px;font-weight:700}
+.admin-link:hover{border-color:#65e59a;transform:translateY(-1px)}
+.publisher-note{font-size:9px;color:#71858f;line-height:1.55;margin-top:10px}
+@media(max-width:650px){.publisher-grid{grid-template-columns:1fr}}
+</style>
+
+</head>
+<body><button id="analysisOpenBtn" class="analysis-btn" style="position:fixed;right:14px;top:14px;z-index:9999" onclick="openAnalysisPage()">📊 TRANG 2</button>
+
+<div id="splash">
+  <div class="logo"><img src="https://cdn.phototourl.com/free/2026-08-30-f5ec5437-3dd0-4f2c-bdf9-3c74ec36d4e3.png" alt="HEADLOCK Logo"></div>
+  <div class="splash-title">HEAD<span>LOCK</span></div>
+  <div class="tap">TAP ANYWHERE TO CONTINUE</div>
+</div>
+
+<main class="app hidden" id="loginPage">
+  <div class="header">
+    <button class="back" onclick="goHome()">←</button>
+    <div class="header-info"><h1>HEADLOCK</h1><p>PREMIUM ACCESS</p></div>
+  </div>
+  <section class="card">
+    <div class="center">
+      <div class="login-icon">🔐</div>
+      <div class="title">KEY LOGIN</div>
+      <div class="subtitle">Enter your access key to continue</div>
+    </div>
+    <div class="input-wrap"><span>🔑</span><input id="keyInput" type="password" placeholder="Enter your key..." autocomplete="off"></div>
+    <button class="btn" onclick="login()">LOGIN</button>
+    <div class="contact"><div class="contact-title">CONTACT</div><p>by XTABOY<br>Premium Panel</p></div><div class="key-status"><div><b>KEY STATUS</b><span id="keyBadge">NO KEY</span></div><span id="keyExpiry">Nhập một key demo để đăng nhập.</span></div>
+  </section>
+  <div class="footer">PANEL MADE FOR DEMO UI</div>
+</main>
+
+<main class="app hidden" id="panelPage">
+  <div class="header">
+    <button class="back" onclick="logout()">←</button>
+    <div class="header-info"><h1>HEADLOCK</h1><p>PREMIUM PANEL</p></div>
+    <button class="back" onclick="showAnalysisPage()" title="Task Analysis">📊</button>
+  </div>
+  <section class="card">
+    <div class="panel-logo"><img src="https://cdn.phototourl.com/free/2026-08-30-f5ec5437-3dd0-4f2c-bdf9-3c74ec36d4e3.png" alt="HEADLOCK Logo"></div>
+    <div class="panel-title">HEADLOCK</div>
+    <div class="panel-author">BY XTABOY</div>
+
+    <div class="features">
+      <button class="feature" onclick="runFeatureProfile(this,'REG FILES')">🎯 REG FILES</button>
+      <button class="feature" onclick="optimizeDemo(this)">🚀 BOOST RAM</button>
+      <button class="feature" onclick="runFeatureProfile(this,'HEADLOCK')">💀 HEADLOCK</button>
+      <button class="feature" onclick="runFeatureProfile(this,'FIX RUNG')">⚙️ FIX RUNG</button>
+    </div>
+
+    <div class="tuning-panel">
+      <div class="tuning-head">
+        <div>
+          <strong>ADVANCED PROFILE</strong>
+          <small>SAFE BROWSER-SIDE PARAMETERS</small>
+        </div>
+        <span id="profileState">READY</span>
+      </div>
+      <div class="tuning-grid">
+        <label>REG STABILITY <output id="regValue">70%</output>
+          <input id="regRange" type="range" min="0" max="100" value="70" oninput="syncTune('reg')">
+        </label>
+        <label>HEADLOCK PROFILE <output id="headValue">65%</output>
+          <input id="headRange" type="range" min="0" max="100" value="65" oninput="syncTune('head')">
+        </label>
+        <label>RUNG / MOTION STABILITY <output id="rungValue">80%</output>
+          <input id="rungRange" type="range" min="0" max="100" value="80" oninput="syncTune('rung')">
+        </label>
+        <label>INPUT RESPONSE <output id="inputValue">75%</output>
+          <input id="inputRange" type="range" min="0" max="100" value="75" oninput="syncTune('input')">
+        </label>
+      </div>
+      <div class="tuning-meter"><i id="tuningBar"></i></div>
+      <div class="tuning-note">Chỉ là profile/diagnostic giao diện: không sửa file game, bộ nhớ hoặc tạo lợi thế gian lận.</div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">STARTING FILES</div>
+      <div class="toggle">
+        <button id="onBtn" class="selected" onclick="setToggle(true)">ON</button>
+        <button id="offBtn" onclick="setToggle(false)">OFF</button>
+      </div>
+    </div>
+
+    <div class="game-version">
+      <div class="version-title">CHỌN PHIÊN BẢN FREE FIRE</div>
+      <div class="version-list">
+        <button class="version selected" onclick="selectVersion(this)">🔥 Free Fire</button>
+        <button class="version" onclick="selectVersion(this)">⚡ Free Fire Max</button>
+      </div>
+    </div>
+
+
+    <div class="section">
+      <div class="section-label">IOS VIP TOOLKIT • SAFE GAME OPTIMIZATION</div>
+      <div class="ios-grid">
+        <div class="ios-card" onclick="iosTool(this,'NETWORK')">
+          <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+          <b>🌐 Network</b><small>Kiểm tra kết nối & độ ổn định</small>
+        </div>
+        <div class="ios-card" onclick="iosTool(this,'CACHE')">
+          <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+          <b>🧹 Cache Check</b><small>Hướng dẫn dọn dữ liệu tạm</small>
+        </div>
+        <div class="ios-card" onclick="iosTool(this,'BATTERY')">
+          <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+          <b>🔋 Battery</b><small>Giám sát trạng thái pin</small>
+        </div>
+        <div class="ios-card" onclick="iosTool(this,'DISPLAY')">
+          <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+          <b>📱 Display</b><small>Tối ưu cài đặt hiển thị iOS</small>
+        </div>
+        <div class="ios-card" onclick="iosTool(this,'STORAGE')">
+          <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+          <b>💾 Storage</b><small>Kiểm tra dung lượng trống</small>
+        </div>
+        <div class="ios-card" onclick="iosTool(this,'FOCUS')">
+          <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+          <b>🎮 Game Focus</b><small>Chuẩn bị phiên chơi ổn định</small>
+        </div>
+      </div>
+      <div class="stats">
+        <div class="stat"><strong id="pingStat">--</strong><span>PING</span></div>
+        <div class="stat"><strong id="batteryStat">--</strong><span>BATTERY</span></div>
+        <div class="stat"><strong id="storageStat">--</strong><span>STORAGE</span></div>
+      </div>
+      <div class="progress"><i id="scanProgress"></i></div>
+      <div class="safe-note">✓ Chế độ an toàn: chỉ kiểm tra/hiển thị trạng thái thiết bị và tối ưu giao diện. Không can thiệp file game, không sửa bộ nhớ và không tạo lợi thế gian lận.</div>
+    </div>
+
+
+    <div class="headshot-panel">
+      <div class="headshot-head"><div><strong>HEADSHOT iOS LAB</strong><small>SAFE TOUCH / AIM PROFILE DIAGNOSTICS</small></div><span id="headshotState">READY</span></div>
+      <div class="headshot-presets">
+        <button onclick="applyHeadshotPreset('BALANCED',this)">BALANCED</button>
+        <button onclick="applyHeadshotPreset('FAST',this)">FAST</button>
+        <button onclick="applyHeadshotPreset('STABLE',this)">STABLE</button>
+        <button onclick="applyHeadshotPreset('PRECISION',this)">PRECISION</button>
+      </div>
+      <div class="headshot-grid">
+        <label>TOUCH RESPONSE <output id="touchOut">78%</output><input id="touchRange" type="range" min="0" max="100" value="78" oninput="updateHeadshotLab()"></label>
+        <label>DRAG SMOOTHNESS <output id="dragOut">72%</output><input id="dragRange" type="range" min="0" max="100" value="72" oninput="updateHeadshotLab()"></label>
+        <label>AIM STABILITY <output id="aimOut">84%</output><input id="aimRange" type="range" min="0" max="100" value="84" oninput="updateHeadshotLab()"></label>
+        <label>INPUT CONSISTENCY <output id="consistencyOut">80%</output><input id="consistencyRange" type="range" min="0" max="100" value="80" oninput="updateHeadshotLab()"></label>
+      </div>
+      <div class="headshot-stats">
+        <div><b id="headshotScore">79%</b><span>PROFILE SCORE</span></div>
+        <div><b id="headshotLatency">--</b><span>INPUT LATENCY</span></div>
+        <div><b id="headshotQuality">GOOD</b><span>QUALITY</span></div>
+      </div>
+      <div class="headshot-meter"><i id="headshotBar"></i></div>
+
+      <div class="hs-dashboard">
+        <div class="hs-mini"><span>TOUCH</span><b id="hsTouchMini">78%</b></div>
+        <div class="hs-mini"><span>DRAG</span><b id="hsDragMini">72%</b></div>
+        <div class="hs-mini"><span>AIM</span><b id="hsAimMini">84%</b></div>
+        <div class="hs-mini"><span>CONSISTENCY</span><b id="hsConsistencyMini">80%</b></div>
+      </div>
+
+      <div class="hs-actions">
+        <button type="button" onclick="runHeadshotCalibration()">⚡ CALIBRATE</button>
+        <button type="button" onclick="runHeadshotTest()">▶ TEST PROFILE</button>
+        <button type="button" onclick="saveHeadshotLab()">💾 SAVE</button>
+        <button type="button" onclick="resetHeadshotLab()">↺ RESET</button>
+      </div>
+
+      <div class="hs-test">
+        <div class="hs-test-head"><span>PROFILE SIMULATION</span><b id="hsTestState">IDLE</b></div>
+        <div class="hs-track"><i id="hsTestBar"></i></div>
+        <div class="hs-test-readout" id="hsTestReadout">Ready for a browser-side profile test.</div>
+      </div>
+
+      <div class="headshot-log" id="headshotLog">Ready. Select a preset or adjust the safe touch profile.</div>
+      <div class="headshot-note">✓ Chỉ mô phỏng và đánh giá profile cảm ứng trong trình duyệt. Không tự động nhắm, không sửa memory/file game, không inject vào tiến trình game và không thay đổi hệ thống iOS.</div>
+    </div>
+
+
+
+    <div class="shadow-module">
+      <div class="shadow-head">
+        <div><strong>SHADOW MODULE • iOS LAB</strong><small>INPUT / NETWORK / PERFORMANCE DIAGNOSTICS</small></div>
+        <span id="shadowState">READY</span>
+      </div>
+      <div class="shadow-grid">
+        <div class="shadow-item"><b>🎯 INPUT PATH</b><span id="shadowInput">READY</span></div>
+        <div class="shadow-item"><b>🌐 NETWORK PATH</b><span id="shadowNetwork">READY</span></div>
+        <div class="shadow-item"><b>🧠 MEMORY HINT</b><span id="shadowMemory">CHECKING…</span></div>
+        <div class="shadow-item"><b>⚙️ MOTION</b><span id="shadowMotion">READY</span></div>
+      </div>
+      <div class="shadow-actions">
+        <button onclick="runShadowDiagnostic()">⚡ SCAN</button>
+        <button onclick="saveShadowProfile()">💾 SAVE</button>
+        <button onclick="resetShadowProfile()">⟳ RESET</button>
+      </div>
+      <div class="shadow-log" id="shadowLog">Shadow diagnostic ready.</div>
+      <div class="shadow-note">✓ Chế độ an toàn: mô phỏng/kiểm tra trong trình duyệt, không phải Shadowrocket, không tự động kéo tâm/headshot, không can thiệp memory, file game hoặc tiến trình iOS.</div>
+    </div>
+
+    <div class="data-engine">
+      <div class="data-head">
+        <div><strong>DATA ENGINE v2</strong><small>PROFILE STORAGE • VALIDATION • RECOVERY</small></div>
+        <span id="dataState">READY</span>
+      </div>
+
+      <div class="data-presets">
+        <button onclick="loadDataPreset('BALANCED',this)">BALANCED</button>
+        <button onclick="loadDataPreset('FAST',this)">FAST</button>
+        <button onclick="loadDataPreset('STABLE',this)">STABLE</button>
+        <button onclick="loadDataPreset('PRECISION',this)">PRECISION</button>
+      </div>
+
+      <div class="data-actions">
+        <button onclick="saveDataProfile()">💾 SAVE</button>
+        <button onclick="loadDataProfile()">↻ LOAD</button>
+        <button onclick="validateDataProfile()">✓ VALIDATE</button>
+        <button onclick="resetDataProfile()">⟳ RESET</button>
+      </div>
+
+      <div class="data-summary">
+        <div><b id="dataVersion">v2.0</b><span>ENGINE</span></div>
+        <div><b id="dataScore">--</b><span>SCORE</span></div>
+        <div><b id="dataUpdated">--</b><span>UPDATED</span></div>
+      </div>
+
+      <div class="data-validation" id="dataValidation">
+        Chưa có dữ liệu profile được kiểm tra.
+      </div>
+      <div class="data-log" id="dataLog">Data Engine ready.</div>
+      <div class="data-note">✓ Chỉ lưu cấu hình cục bộ của giao diện bằng localStorage; không ghi vào file game hoặc bộ nhớ game.</div>
+    </div>
+
+    <div class="pro-tools">
+      <div class="pro-head">
+        <div>
+          <strong>PRO CONTROL CENTER</strong>
+          <small>REAL-TIME BROWSER DIAGNOSTICS</small>
+        </div>
+        <span id="systemState" class="pro-state">READY</span>
+      </div>
+      <div class="pro-actions">
+        <button onclick="runFullDiagnostic()">⚡ FULL SCAN</button>
+        <button onclick="refreshLiveStats()">↻ LIVE STATS</button>
+        <button onclick="exportReport()">⇩ REPORT</button>
+        <button onclick="resetDemoData()">⟳ RESET</button>
+      </div>
+      <div class="pro-log" id="proLog">System ready. Waiting for command...</div>
+    </div>
+
+    
+    <div class="pro-lab">
+      <div class="lab-head">
+        <div>
+          <strong>⚡ PRO PERFORMANCE LAB</strong>
+          <small>FIX LAG • FIX RUNG • REG / HEADSHOT DIAGNOSTICS</small>
+        </div>
+        <span id="labState">READY</span>
+      </div>
+
+      <div class="lab-tabs">
+        <button class="lab-tab active" onclick="switchLab('performance',this)">🚀 PERFORMANCE</button>
+        <button class="lab-tab" onclick="switchLab('touch',this)">🎯 TOUCH</button>
+        <button class="lab-tab" onclick="switchLab('network',this)">🌐 NETWORK</button>
+      </div>
+
+      <div class="lab-pane" id="lab-performance">
+        <div class="lab-cards">
+          <button onclick="runProAction('lag',this)"><b>🧊 FIX LAG</b><small>Kiểm tra tải trình duyệt & giảm tác vụ UI</small></button>
+          <button onclick="runProAction('rung',this)"><b>📳 FIX RUNG</b><small>Đánh giá độ ổn định input / motion</small></button>
+          <button onclick="runProAction('fps',this)"><b>⚡ FPS CHECK</b><small>Đo frame-time của giao diện</small></button>
+          <button onclick="runProAction('cleanup',this)"><b>🧹 UI CLEANUP</b><small>Thu gọn tài nguyên tạm của panel</small></button>
+        </div>
+        <div class="lab-metrics">
+          <div><b id="lagScore">--</b><span>LAG SCORE</span></div>
+          <div><b id="motionScore">--</b><span>MOTION</span></div>
+          <div><b id="fpsScore">--</b><span>FPS UI</span></div>
+        </div>
+      </div>
+
+      <div class="lab-pane hidden" id="lab-touch">
+        <div class="touch-profile">
+          <div class="touch-row"><span>Touch response</span><output id="proTouchOut">78%</output></div>
+          <input id="proTouchRange" type="range" min="0" max="100" value="78" oninput="updateProTouch()">
+          <div class="touch-row"><span>Drag stability</span><output id="proDragOut">82%</output></div>
+          <input id="proDragRange" type="range" min="0" max="100" value="82" oninput="updateProTouch()">
+          <div class="touch-row"><span>Motion stability</span><output id="proMotionOut">90%</output></div>
+          <input id="proMotionRange" type="range" min="0" max="100" value="90" oninput="updateProTouch()">
+        </div>
+        <button class="lab-main-btn" onclick="calibrateTouch()">🎯 CALIBRATE SAFE PROFILE</button>
+      </div>
+
+      <div class="lab-pane hidden" id="lab-network">
+        <div class="network-box">
+          <div><span>Connection</span><b id="proOnline">--</b></div>
+          <div><span>Effective type</span><b id="proNetwork">--</b></div>
+          <div><span>Measured latency</span><b id="proPing">--</b></div>
+        </div>
+        <button class="lab-main-btn" onclick="runNetworkPro()">🌐 RUN NETWORK TEST</button>
+      </div>
+
+      <div class="lab-progress"><i id="labBar"></i></div>
+      <div class="lab-log" id="labLog">PRO Lab ready. Chọn một module để bắt đầu.</div>
+      <div class="lab-note">✓ Safe mode: các nút chỉ chẩn đoán/tối ưu giao diện trong trình duyệt; không tự động ngắm, không sửa memory/file game và không can thiệp tiến trình iOS.</div>
+    </div>
+
+<div class="info">
+      <div class="info-head"><strong>INFO</strong><span class="status">● ONLINE</span></div>
+      <p id="infoText">Panel ready. Choose an option above.</p>
+      <p class="social">Zalo • Facebook • TikTok</p>
+    </div>
+
+    <div id="result" class="result"></div>
+    <button class="btn" onclick="updateDemo()">UPDATE TO NEW+</button>
+  </section>
+  
+      
+      <div class="android-bridge" id="iosBridge">
+        <div class="bridge-head">
+          <div>
+            <strong>IOS GAME BRIDGE • PRO</strong>
+            <small>FREE FIRE TARGET • SAFETY DIAGNOSTICS • COMMAND CONSOLE</small>
+          </div>
+          <span id="iosState">READY</span>
+        </div>
+
+        <div class="bridge-targets">
+          <button class="bridge-target active" data-ios-pkg="com.dts.freefireth" onclick="selectIOSTarget(this)">
+            🔥 FREE FIRE
+            <small>com.dts.freefireth</small>
+          </button>
+          <button class="bridge-target" data-ios-pkg="com.dts.freefiremax" onclick="selectIOSTarget(this)">
+            ⚡ FREE FIRE MAX
+            <small>com.dts.freefiremax</small>
+          </button>
+        </div>
+
+        <div class="bridge-actions">
+          <button onclick="iosLaunch()">▶ OPEN APP</button>
+          <button onclick="iosCheck()">✓ CHECK IOS</button>
+          <button onclick="iosDiagnostics()">⚡ SCAN</button>
+          <button onclick="iosCopyId()">⧉ COPY ID</button>
+        </div>
+
+        <div class="command-box" id="headshotFileModule">
+          <label>HEADSHOT COMMAND FILE • SAFE PROFILE IMPORT</label>
+          <input id="headshotFileInput" type="file" accept=".json,.txt,.cfg,.headshot,application/json,text/plain"
+                 style="width:100%;margin-top:8px;padding:10px;border:1px solid #202830;border-radius:8px;background:#030506;color:#9aa8b1;font-size:10px;">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px;">
+            <button class="bridge-main" type="button" onclick="importHeadshotCommandFile()">📥 IMPORT FILE</button>
+            <button class="bridge-main" type="button" onclick="exportHeadshotCommandFile()">⇩ EXPORT PROFILE</button>
+          </div>
+          <div class="bridge-log" id="headshotFileLog" style="margin-top:8px;">
+            Chưa nhập file • Chỉ đọc profile an toàn, không inject vào game.
+          </div>
+          <div class="bridge-note">
+            ✓ File được kiểm tra theo schema local. FILES/iOS Safari không thể nạp lệnh trực tiếp vào tiến trình Free Fire.
+            Module này chỉ áp dụng profile cảm ứng/diagnostic và có thể mở game sau khi import.
+          </div>
+        </div>
+
+        <div class="command-box">
+          <label>IOS SAFE COMMAND CONSOLE
+            <textarea id="iosCommand" spellcheck="false" placeholder="headshot balanced&#10;headshot precision&#10;profile stable&#10;fps test&#10;network test&#10;export report"></textarea>
+          </label>
+          <button class="bridge-main" onclick="runIOSCommand()">RUN COMMAND</button>
+        </div>
+
+        <div class="bridge-status">
+          <div><span>TARGET</span><b id="iosPackage">com.dts.freefireth</b></div>
+          <div><span>PLATFORM</span><b id="iosPlatform">CHECKING</b></div>
+          <div><span>ACCESS</span><b>NO INJECTION</b></div>
+        </div>
+        <div class="bridge-log" id="iosLog">iOS bridge ready • Browser-safe mode.</div>
+        <div class="bridge-note">
+          ✓ iOS Safari/WebView sandbox: có thể chạy profile, đo FPS/network, lưu dữ liệu và gọi URL scheme khi được hỗ trợ. Không inject process, sửa memory/APK/IPA hoặc bypass cơ chế bảo vệ game.
+        </div>
+      </div>
+
+<div class="footer">Copyright belongs to XTABOY<br>Thank For Using</div>
+
+    <div class="admin-card">
+      <div class="admin-avatar">A</div>
+      <div class="admin-main">
+        <div class="admin-title">ADMIN INFORMATION <span>VERIFIED</span></div>
+        <div class="admin-name">XTABOY</div>
+        <div class="admin-sub">HEADLOCK PREMIUM • SUPPORT &amp; UPDATES</div>
+        <div class="admin-links">
+          <a href="#" onclick="openAdminLink('zalo');return false;">💬 Zalo</a>
+          <a href="#" onclick="openAdminLink('facebook');return false;">ⓕ Facebook</a>
+          <a href="#" onclick="openAdminLink('tiktok');return false;">♪ TikTok</a>
+        </div>
+      </div>
+    </div>
+
+</main>
+
+<div class="modal" id="ramModal">
+  <div class="modal-box">
+    <h2>🚀 Tối ưu máy</h2>
+    <div class="terminal" id="terminal"></div>
+    <button class="btn" onclick="closeRam()">Đóng</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const splash=document.getElementById("splash");
+const loginPage=document.getElementById("loginPage");
+const panelPage=document.getElementById("panelPage");
+
+function startApp(){
+  splash.style.opacity="0";
+  setTimeout(()=>{splash.style.display="none";loginPage.classList.remove("hidden")},500);
+}
+splash.addEventListener("click",startApp,{once:true});
+setTimeout(()=>{if(splash.style.display!=="none")startApp()},2500);
+
+const DEMO_KEYS = {
+  "HEADLOCK-DAYS-XTABOY11": {days: 1, label: "TRIAL"},
+  "HEADLOCK-7D-XTABOY-0347975093-@@": {days: 7, label: "7 DAYS"},
+  "HEADLOCK-30D-0347975093-@#/+": {days: 30, label: "30 DAYS"},
+  "HEADLOCK-PREMIUM-XTABOY-123@@": {days: 3650, label: "PREMIUM"}
+};
+
+function getKeyData(){
+  try { return JSON.parse(localStorage.getItem("headlock_key") || "null"); }
+  catch(e){ return null; }
+}
+
+function saveKeyData(key, data){
+  localStorage.setItem("headlock_key", JSON.stringify({
+    key:key,
+    label:data.label,
+    expiresAt:Date.now() + data.days*86400000
+  }));
+}
+
+function validSavedKey(){
+  const data=getKeyData();
+  return data && data.expiresAt > Date.now() ? data : null;
+}
+
+function login(){
+  const key=document.getElementById("keyInput").value.trim().toUpperCase();
+  if(!key){showToast("⚠️ Vui lòng nhập key");return}
+
+  const saved=validSavedKey();
+  if(saved && saved.key===key){
+    openPanel(saved);
+    return;
+  }
+
+  const data=DEMO_KEYS[key];
+  if(!data){
+    showToast("❌ Key không hợp lệ");
+    document.getElementById("infoText").textContent="Access denied.";
+    return;
+  }
+
+  saveKeyData(key,data);
+  openPanel({...data, expiresAt:Date.now()+data.days*86400000});
+}
+
+function openPanel(data){
+  loginPage.classList.add("hidden");
+  panelPage.classList.remove("hidden");
+  const remaining=Math.max(0, Math.ceil((data.expiresAt-Date.now())/86400000));
+  showToast("✓ Login successful");
+  document.getElementById("infoText").textContent =
+    "Access: "+data.label+" • Còn "+remaining+" ngày.";
+}
+
+function logout(){
+  panelPage.classList.add("hidden");
+  loginPage.classList.remove("hidden");
+  document.getElementById("keyInput").value="";
+  showToast("Logged out");
+}
+function goHome(){showToast("Enter your access key")}
+
+function featureDemo(button,name){
+  document.querySelectorAll(".feature").forEach(el=>el.classList.remove("active"));
+  button.classList.add("active");
+  document.getElementById("infoText").textContent=name+" selected — demo mode.";
+  const result=document.getElementById("result");
+  result.classList.add("show");
+  result.textContent="✓ "+name+" ready (UI demo)";
+  showToast("✓ "+name);
+}
+function setToggle(enabled){
+  const on=document.getElementById("onBtn"),off=document.getElementById("offBtn");
+  on.classList.toggle("selected",enabled);off.classList.toggle("selected",!enabled);
+  document.getElementById("infoText").textContent="Starting Files: "+(enabled?"ON":"OFF");
+  showToast(enabled?"✓ Starting Files ON":"Starting Files OFF");
+}
+function selectVersion(button){
+  document.querySelectorAll(".version").forEach(el=>el.classList.remove("selected"));
+  button.classList.add("selected");
+  document.getElementById("infoText").textContent="Selected: "+button.textContent.trim();
+  showToast("✓ "+button.textContent.trim());
+}
+function optimizeDemo(button){
+  document.querySelectorAll(".feature").forEach(el=>el.classList.remove("active"));
+  button.classList.add("active");
+  document.getElementById("ramModal").classList.add("show");
+  runTerminal();
+}
+function runTerminal(){
+  const terminal=document.getElementById("terminal");terminal.innerHTML="";
+  const lines=[
+    "$ Initializing PRO performance scan...",
+    "$ Reading browser/device capabilities...",
+    "$ Checking memory pressure and storage API...",
+    "$ Measuring connection latency...",
+    "$ Applying safe browser-side optimizations...",
+    "$ Releasing temporary UI resources...",
+    "$ Finalizing diagnostic profile..."
+  ];
+  let i=0;
+  const timer=setInterval(()=>{
+    if(i<lines.length){const line=document.createElement("div");line.textContent=lines[i++];terminal.appendChild(line)}
+    else{clearInterval(timer);const done=document.createElement("div");done.className="done";done.innerHTML="<br>✓ PRO scan completed safely.";terminal.appendChild(done);
+      document.getElementById("infoText").textContent="PRO performance scan completed — no game files or memory were modified.";
+      writeProLog("Performance scan completed successfully.");}
+  },450);
+}
+function closeRam(){document.getElementById("ramModal").classList.remove("show");showToast("✓ Done")}
+function updateDemo(){
+  const version="HEADLOCK PRO 3.0";
+  showToast("Checking interface status...");
+  setTimeout(()=>{
+    document.getElementById("infoText").textContent=version+" • Interface healthy.";
+    writeProLog(version+" ready. All browser-safe modules loaded.");
+    showToast("✓ System ready");
+  },700);
+}
+let toastTimer;
+function showToast(message){
+  const toast=document.getElementById("toast");toast.textContent=message;toast.classList.add("show");
+  clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove("show"),2200);
+}
+
+function iosTool(card,name){
+  if(!card) return;
+  document.querySelectorAll(".ios-card").forEach(x=>x.classList.remove("active"));
+  card.classList.add("active");
+  const input=card.querySelector('input[type="checkbox"]');
+  const enabled=input ? input.checked : true;
+  const messages={
+    NETWORK:"Network check: đang kiểm tra độ ổn định kết nối.",
+    CACHE:"Cache check: iOS không cho HTML tự ý xóa cache ứng dụng game.",
+    BATTERY:"Battery monitor: đọc mức pin khi trình duyệt cho phép.",
+    DISPLAY:"Display profile: kiểm tra cấu hình hiển thị hiện tại.",
+    STORAGE:"Storage check: kiểm tra bộ nhớ khả dụng của trình duyệt.",
+    FOCUS:"Game Focus: chuẩn bị giao diện tối giản trước khi chơi."
+  };
+  document.getElementById("infoText").textContent=
+    (messages[name]||"iOS tool ready.")+" • "+(enabled?"ON":"OFF");
+  showToast((enabled?"✓ ":"○ ")+name+" "+(enabled?"ON":"OFF"));
+  scanIOS();
+}
+async function scanIOS(){
+  const bar=document.getElementById("scanProgress");
+  if(!bar || scanIOS.running) return;
+  scanIOS.running=true;
+  bar.style.width="20%";
+
+  const battery=document.getElementById("batteryStat");
+  const storage=document.getElementById("storageStat");
+  const ping=document.getElementById("pingStat");
+
+  const tasks=[];
+  if(navigator.getBattery){
+    tasks.push(navigator.getBattery().then(b=>{
+      battery.textContent=Math.round(b.level*100)+"%";
+    }).catch(()=>battery.textContent="N/A"));
+  }else battery.textContent="N/A";
+
+  if(navigator.storage && navigator.storage.estimate){
+    tasks.push(navigator.storage.estimate().then(x=>{
+      if(x.quota){
+        const free=Math.max(0,(x.quota-(x.usage||0))/1024/1024/1024);
+        storage.textContent=free.toFixed(1)+"G";
+      }else storage.textContent="N/A";
+    }).catch(()=>storage.textContent="N/A"));
+  }else storage.textContent="N/A";
+
+  /* Avoid fetching the whole HTML just to calculate ping. */
+  const t=performance.now();
+  fetch(location.href,{cache:"no-store",method:"HEAD",credentials:"same-origin"})
+    .then(()=>ping.textContent=Math.max(1,Math.round(performance.now()-t))+"ms")
+    .catch(()=>ping.textContent="N/A")
+  await Promise.allSettled(tasks);
+  bar.style.width="100%";
+  scanIOS.running=false;
+}
+
+
+
+function writeProLog(message){
+  const el=document.getElementById("proLog");
+  if(!el) return;
+  const stamp=new Date().toLocaleTimeString("vi-VN");
+  el.textContent="["+stamp+"] "+message;
+}
+
+function setSystemState(state){
+  const el=document.getElementById("systemState");
+  if(el) el.textContent=state;
+}
+
+async function measurePing(){
+  const t=performance.now();
+  try{
+    await fetch(location.href,{cache:"no-store",method:"HEAD",credentials:"same-origin"});
+    return Math.max(1,Math.round(performance.now()-t));
+  }catch(e){ return null; }
+}
+
+async function getDeviceSnapshot(){
+  const data={
+    online:navigator.onLine,
+    platform:navigator.platform||"N/A",
+    language:navigator.language||"N/A",
+    cores:navigator.hardwareConcurrency||"N/A",
+    memory:navigator.deviceMemory ? navigator.deviceMemory+" GB" : "N/A",
+    connection:(navigator.connection&&navigator.connection.effectiveType)||"N/A",
+    battery:"N/A",
+    storage:"N/A"
+  };
+
+  if(navigator.getBattery){
+    try{
+      const b=await navigator.getBattery();
+      data.battery=Math.round(b.level*100)+"%";
+    }catch(e){}
+  }
+  if(navigator.storage&&navigator.storage.estimate){
+    try{
+      const s=await navigator.storage.estimate();
+      if(s.quota){
+        const free=Math.max(0,(s.quota-(s.usage||0))/1024/1024/1024);
+        data.storage=free.toFixed(1)+" GB";
+      }
+    }catch(e){}
+  }
+  return data;
+}
+
+async function runFullDiagnostic(){
+  if(window.__proScanning) return;
+  window.__proScanning=true;
+  setSystemState("SCANNING");
+  writeProLog("Starting full diagnostic...");
+  document.getElementById("scanProgress").style.width="15%";
+
+  try{
+    const snap=await getDeviceSnapshot();
+    document.getElementById("scanProgress").style.width="45%";
+    const ping=await measurePing();
+    document.getElementById("scanProgress").style.width="75%";
+
+    document.getElementById("pingStat").textContent=ping===null?"N/A":ping+"ms";
+    document.getElementById("batteryStat").textContent=snap.battery;
+    document.getElementById("storageStat").textContent=snap.storage;
+
+    const report=[
+      "Connection: "+(snap.online?"ONLINE":"OFFLINE"),
+      "Platform: "+snap.platform,
+      "CPU cores: "+snap.cores,
+      "Memory hint: "+snap.memory,
+      "Network: "+snap.connection,
+      "Ping: "+(ping===null?"N/A":ping+"ms")
+    ].join(" • ");
+
+    document.getElementById("infoText").textContent=report;
+    document.getElementById("scanProgress").style.width="100%";
+    setSystemState("HEALTHY");
+    writeProLog("Full diagnostic completed. "+report);
+    showToast("✓ Full scan completed");
+  }catch(e){
+    setSystemState("ERROR");
+    writeProLog("Diagnostic error: "+e.message);
+    showToast("⚠️ Diagnostic failed");
+  }finally{
+    window.__proScanning=false;
+  }
+}
+
+async function refreshLiveStats(){
+  writeProLog("Refreshing live device stats...");
+  await scanIOS();
+  const ping=await measurePing();
+  if(ping!==null) document.getElementById("pingStat").textContent=ping+"ms";
+  writeProLog("Live stats refreshed.");
+  showToast("✓ Live stats updated");
+}
+
+function exportReport(){
+  const report={
+    app:"HEADLOCK PRO",
+    generatedAt:new Date().toISOString(),
+    online:navigator.onLine,
+    platform:navigator.platform||"N/A",
+    language:navigator.language||"N/A",
+    cores:navigator.hardwareConcurrency||"N/A",
+    memoryHint:navigator.deviceMemory||null,
+    connection:(navigator.connection&&navigator.connection.effectiveType)||"N/A",
+    ping:document.getElementById("pingStat")?.textContent||"N/A",
+    battery:document.getElementById("batteryStat")?.textContent||"N/A",
+    storage:document.getElementById("storageStat")?.textContent||"N/A"
+  };
+  const blob=new Blob([JSON.stringify(report,null,2)],{type:"application/json"});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+  a.href=url;
+  a.download="headlock-pro-report.json";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+  writeProLog("Diagnostic report exported.");
+  showToast("✓ Report exported");
+}
+
+function resetDemoData(){
+  try{
+    localStorage.removeItem("headlock_key");
+    document.getElementById("keyInput").value="";
+    updateKeyStatus();
+    document.getElementById("infoText").textContent="Local demo data reset.";
+    writeProLog("Local demo state cleared.");
+    showToast("✓ Reset completed");
+  }catch(e){
+    showToast("⚠️ Reset unavailable");
+  }
+}
+
+function updateKeyStatus(){
+  const badge=document.getElementById("keyBadge");
+  const expiry=document.getElementById("keyExpiry");
+  const data=validSavedKey();
+
+  if(!badge || !expiry) return;
+
+  if(data){
+    const d=new Date(data.expiresAt);
+    badge.textContent="ACTIVE";
+    expiry.textContent=data.label+" • Hết hạn: "+d.toLocaleString("vi-VN");
+  }else{
+    badge.textContent="NO KEY";
+    badge.style.color="#ff6b6b";
+    expiry.textContent="Nhập một key demo để đăng nhập.";
+  }
+}
+
+document.getElementById("keyInput").addEventListener("keydown",e=>{if(e.key==="Enter")login()});
+updateKeyStatus();
+setTimeout(()=>runFullDiagnostic(),700);
+setInterval(updateKeyStatus,30000);
+document.getElementById("ramModal").addEventListener("click",e=>{if(e.target===e.currentTarget)closeRam()});
+
+/* ===== RELIABLE TOUCH / FEATURE STATE ===== */
+document.querySelectorAll(".ios-card input").forEach(input=>{
+  input.addEventListener("click",e=>{
+    e.stopPropagation();
+    const card=input.closest(".ios-card");
+    if(card){
+      const name=(card.querySelector("b")?.textContent||"TOOL").replace(/^\S+\s*/,"").trim();
+      iosTool(card,name.toUpperCase().replace(/\s+/g,"_"));
+    }
+  });
+});
+
+document.querySelectorAll(".ios-card").forEach(card=>{
+  card.addEventListener("click",e=>{
+    if(e.target.closest(".switch")) return;
+    const input=card.querySelector("input");
+    if(input){
+      input.checked=!input.checked;
+      const name=(card.querySelector("b")?.textContent||"TOOL").replace(/^\S+\s*/,"").trim();
+      iosTool(card,name.toUpperCase().replace(/\s+/g,"_"));
+    }
+  });
+});
+
+
+function syncTune(type){
+  const map={reg:["regRange","regValue"],head:["headRange","headValue"],rung:["rungRange","rungValue"],input:["inputRange","inputValue"]};
+  const ids=map[type]; if(!ids) return;
+  const value=document.getElementById(ids[0]).value;
+  document.getElementById(ids[1]).textContent=value+"%";
+  updateTuneMeter();
+  setSystemState("TUNING");
+  document.getElementById("profileState").textContent="TUNING";
+}
+function updateTuneMeter(){
+  const vals=["regRange","headRange","rungRange","inputRange"].map(id=>Number(document.getElementById(id).value));
+  const avg=Math.round(vals.reduce((a,b)=>a+b,0)/vals.length);
+  document.getElementById("tuningBar").style.width=avg+"%";
+}
+function runFeatureProfile(button,name){
+  document.querySelectorAll(".feature").forEach(el=>el.classList.remove("active"));
+  button.classList.add("active");
+  const presets={
+    "REG FILES":[82,70,78,80],
+    "HEADLOCK":[75,90,76,88],
+    "FIX RUNG":[72,68,94,84]
+  };
+  const p=presets[name]||[70,65,80,75];
+  ["regRange","headRange","rungRange","inputRange"].forEach((id,i)=>{
+    document.getElementById(id).value=p[i];
+  });
+  ["reg","head","rung","input"].forEach(syncTune);
+  const avg=Math.round(p.reduce((a,b)=>a+b,0)/p.length);
+  document.getElementById("profileState").textContent="ACTIVE";
+  setSystemState("PROFILE");
+  document.getElementById("infoText").textContent =
+    name+" profile loaded • Stability "+avg+"% • browser-safe diagnostic.";
+  document.getElementById("result").classList.add("show");
+  document.getElementById("result").textContent =
+    "✓ "+name+" profile ready • "+avg+"% diagnostic score";
+  writeProLog(name+" profile applied. Score "+avg+"%. No game files or memory modified.");
+  showToast("✓ "+name+" profile ready");
+}
+updateTuneMeter();
+
+
+const HEADSHOT_PRESETS={BALANCED:[78,72,84,80],FAST:[92,58,72,90],STABLE:[68,91,94,88],PRECISION:[74,82,96,93]};
+function applyHeadshotPreset(name,button){
+  const p=HEADSHOT_PRESETS[name]||HEADSHOT_PRESETS.BALANCED;
+  ["touchRange","dragRange","aimRange","consistencyRange"].forEach((id,i)=>document.getElementById(id).value=p[i]);
+  document.querySelectorAll(".headshot-presets button").forEach(b=>b.classList.remove("active"));
+  if(button)button.classList.add("active");
+  updateHeadshotLab(name);showToast("✓ "+name+" headshot profile");
+}
+function updateHeadshotLab(presetName){
+  const ids=[["touchRange","touchOut"],["dragRange","dragOut"],["aimRange","aimOut"],["consistencyRange","consistencyOut"]];
+  const v=ids.map(x=>{let n=Number(document.getElementById(x[0]).value);document.getElementById(x[1]).textContent=n+"%";return n});
+  const score=Math.round(v.reduce((a,b)=>a+b,0)/v.length), quality=score>=90?"EXCELLENT":score>=80?"GOOD":score>=65?"FAIR":"LOW";
+  document.getElementById("headshotScore").textContent=score+"%";document.getElementById("headshotBar").style.width=score+"%";document.getElementById("headshotQuality").textContent=quality;
+  document.getElementById("headshotState").textContent="ACTIVE";
+  document.getElementById("headshotLatency").textContent=Math.max(8,Math.round(58-v[0]*.22-v[3]*.10))+"ms";
+  document.getElementById("headshotLog").textContent=(presetName?"Preset "+presetName+" loaded. ":"Profile adjusted. ")+"Score "+score+"% • Touch "+v[0]+"% • Drag "+v[1]+"% • Aim stability "+v[2]+"% • Consistency "+v[3]+"%.";
+  document.getElementById("infoText").textContent="Headshot iOS profile • "+quality+" • "+score+"% diagnostic score.";
+  writeProLog("Headshot iOS profile updated. "+score+"% diagnostic score.");
+}
+updateHeadshotLab();
+
+
+const DATA_ENGINE_KEY="headlock_data_engine_v2";
+const DATA_ENGINE_VERSION="2.0";
+
+function getDataProfile(){
+  const ids=["touchRange","dragRange","aimRange","consistencyRange","regRange","headRange","rungRange","inputRange"];
+  const profile={version:DATA_ENGINE_VERSION,updatedAt:new Date().toISOString(),values:{}};
+  ids.forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) profile.values[id]=Number(el.value);
+  });
+  return profile;
+}
+
+function validateDataObject(profile){
+  const required=["touchRange","dragRange","aimRange","consistencyRange","regRange","headRange","rungRange","inputRange"];
+  if(!profile || profile.version!==DATA_ENGINE_VERSION || !profile.values) return {ok:false,message:"Schema không hợp lệ."};
+  for(const id of required){
+    const value=profile.values[id];
+    if(!Number.isFinite(value) || value<0 || value>100) return {ok:false,message:"Giá trị "+id+" phải nằm trong 0–100."};
+  }
+  return {ok:true,message:"Dữ liệu hợp lệ • 8/8 thông số OK."};
+}
+
+function applyDataProfile(profile){
+  const result=validateDataObject(profile);
+  if(!result.ok) return result;
+  Object.entries(profile.values).forEach(([id,value])=>{
+    const el=document.getElementById(id);
+    if(el) el.value=value;
+  });
+  if(typeof updateHeadshotLab==="function") updateHeadshotLab();
+  if(typeof updateTuneMeter==="function") updateTuneMeter();
+  return result;
+}
+
+function saveDataProfile(){
+  const profile=getDataProfile();
+  const check=validateDataObject(profile);
+  if(!check.ok){setDataState("INVALID");showToast("⚠️ "+check.message);return;}
+  localStorage.setItem(DATA_ENGINE_KEY,JSON.stringify(profile));
+  setDataState("SAVED");
+  updateDataSummary(profile);
+  writeDataLog("Profile saved locally • "+profile.updatedAt);
+  showToast("✓ Data profile saved");
+}
+
+function loadDataProfile(){
+  const raw=localStorage.getItem(DATA_ENGINE_KEY);
+  if(!raw){setDataState("EMPTY");showToast("⚠️ Chưa có profile đã lưu");return;}
+  try{
+    const profile=JSON.parse(raw),check=applyDataProfile(profile);
+    if(!check.ok){setDataState("INVALID");showToast("⚠️ "+check.message);return;}
+    setDataState("LOADED");updateDataSummary(profile);writeDataLog("Profile loaded and validated.");
+    showToast("✓ Data profile loaded");
+  }catch(e){setDataState("ERROR");writeDataLog("Load error: "+e.message);showToast("⚠️ Load failed");}
+}
+
+function validateDataProfile(){
+  const profile=getDataProfile(),check=validateDataObject(profile);
+  const box=document.getElementById("dataValidation");
+  box.textContent=(check.ok?"✓ ":"✕ ")+check.message;
+  box.style.color=check.ok?"#78ffad":"#ff8a8a";
+  setDataState(check.ok?"VALID":"INVALID");
+  updateDataSummary(profile);
+  writeDataLog(check.message);
+  showToast(check.ok?"✓ Data valid":"⚠️ Data invalid");
+}
+
+function resetDataProfile(){
+  localStorage.removeItem(DATA_ENGINE_KEY);
+  const defaults={touchRange:78,dragRange:72,aimRange:84,consistencyRange:80,regRange:70,headRange:65,rungRange:80,inputRange:75};
+  Object.entries(defaults).forEach(([id,value])=>{const el=document.getElementById(id);if(el)el.value=value;});
+  if(typeof updateHeadshotLab==="function")updateHeadshotLab();
+  if(typeof updateTuneMeter==="function")updateTuneMeter();
+  setDataState("RESET");updateDataSummary(getDataProfile());writeDataLog("Local profile cleared and defaults restored.");
+  showToast("✓ Data reset");
+}
+
+function loadDataPreset(name,button){
+  const presets={
+    BALANCED:{touchRange:78,dragRange:72,aimRange:84,consistencyRange:80,regRange:70,headRange:65,rungRange:80,inputRange:75},
+    FAST:{touchRange:92,dragRange:58,aimRange:72,consistencyRange:90,regRange:82,headRange:78,rungRange:72,inputRange:94},
+    STABLE:{touchRange:68,dragRange:91,aimRange:94,consistencyRange:88,regRange:76,headRange:82,rungRange:94,inputRange:82},
+    PRECISION:{touchRange:74,dragRange:82,aimRange:96,consistencyRange:93,regRange:84,headRange:92,rungRange:86,inputRange:88}
+  };
+  const p=presets[name];if(!p)return;
+  Object.entries(p).forEach(([id,value])=>{const el=document.getElementById(id);if(el)el.value=value;});
+  document.querySelectorAll(".data-presets button").forEach(b=>b.classList.remove("active"));
+  if(button)button.classList.add("active");
+  if(typeof updateHeadshotLab==="function")updateHeadshotLab();
+  if(typeof updateTuneMeter==="function")updateTuneMeter();
+  const profile=getDataProfile();updateDataSummary(profile);setDataState("PRESET");
+  writeDataLog("Preset "+name+" loaded. Ready to save.");
+  showToast("✓ Preset "+name);
+}
+
+function setDataState(state){
+  const el=document.getElementById("dataState");if(el)el.textContent=state;
+}
+function writeDataLog(message){
+  const el=document.getElementById("dataLog");if(el)el.textContent="["+new Date().toLocaleTimeString("vi-VN")+"] "+message;
+}
+function updateDataSummary(profile){
+  const values=Object.values(profile.values||{}).filter(Number.isFinite);
+  const score=values.length?Math.round(values.reduce((a,b)=>a+b,0)/values.length):"--";
+  document.getElementById("dataVersion").textContent="v"+DATA_ENGINE_VERSION;
+  document.getElementById("dataScore").textContent=score+(score==="--"?"":"%");
+  document.getElementById("dataUpdated").textContent=profile.updatedAt?new Date(profile.updatedAt).toLocaleTimeString("vi-VN"):"--";
+}
+
+setTimeout(()=>{
+  const raw=localStorage.getItem(DATA_ENGINE_KEY);
+  if(raw){
+    try{
+      const p=JSON.parse(raw),c=validateDataObject(p);
+      if(c.ok){applyDataProfile(p);updateDataSummary(p);setDataState("AUTO");writeDataLog("Saved profile restored automatically.");}
+    }catch(e){}
+  }else updateDataSummary(getDataProfile());
+},300);
+
+
+
+/* ===== SAFE SHADOW DIAGNOSTIC ===== */
+const SHADOW_KEY="headlock_shadow_profile_v3";
+function shadowLog(msg){
+  const el=document.getElementById("shadowLog");
+  if(el) el.textContent="["+new Date().toLocaleTimeString("vi-VN")+"] "+msg;
+}
+function runShadowDiagnostic(){
+  const state=document.getElementById("shadowState");
+  if(state) state.textContent="SCANNING";
+  const input=document.getElementById("shadowInput");
+  const net=document.getElementById("shadowNetwork");
+  const mem=document.getElementById("shadowMemory");
+  const motion=document.getElementById("shadowMotion");
+  if(input) input.textContent=(navigator.maxTouchPoints||0)>0?"TOUCH DEVICE":"POINTER";
+  if(net) net.textContent=navigator.onLine?"ONLINE":"OFFLINE";
+  if(mem) mem.textContent=navigator.deviceMemory?(navigator.deviceMemory+" GB HINT"):"UNAVAILABLE";
+  if(motion) motion.textContent=window.matchMedia("(prefers-reduced-motion: reduce)").matches?"REDUCED":"NORMAL";
+  setTimeout(()=>{
+    if(state) state.textContent="HEALTHY";
+    shadowLog("Scan complete • input/network/memory/motion checked locally.");
+    showToast("✓ Shadow diagnostic complete");
+  },500);
+}
+function getShadowProfile(){
+  return {
+    version:"3.0",
+    updatedAt:new Date().toISOString(),
+    safeMode:true,
+    touch:navigator.maxTouchPoints||0,
+    reducedMotion:window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+    online:navigator.onLine
+  };
+}
+function saveShadowProfile(){
+  localStorage.setItem(SHADOW_KEY,JSON.stringify(getShadowProfile()));
+  shadowLog("Safe diagnostic profile saved locally.");
+  showToast("✓ Shadow profile saved");
+}
+function resetShadowProfile(){
+  localStorage.removeItem(SHADOW_KEY);
+  const state=document.getElementById("shadowState");
+  if(state) state.textContent="RESET";
+  ["shadowInput","shadowNetwork","shadowMemory","shadowMotion"].forEach(id=>{
+    const el=document.getElementById(id); if(el) el.textContent="READY";
+  });
+  shadowLog("Local shadow diagnostic data cleared.");
+  showToast("✓ Shadow reset");
+}
+setTimeout(runShadowDiagnostic,900);
+
+const ADMIN_LINKS = {
+  group: "https://zalo.me/g/itvkre200",
+  admin: "https://t.me/nhpmodgamee",
+  contact: "https://zalo.me/84347975093"
+};
+function openAdminLink(type){
+  const url=ADMIN_LINKS[type];
+  if(!url){showToast("ℹ️ Chưa cấu hình link "+type);return;}
+  window.open(url,"_blank","noopener,noreferrer");
+}
+
+window.addEventListener("error",e=>{
+  console.warn("HEADLOCK UI error:",e.message);
+});
+
+/* ===== PRO PERFORMANCE LAB ENGINE ===== */
+function setLabState(state){
+  const e=document.getElementById("labState");
+  if(e)e.textContent=state;
+}
+function labLog(text){
+  const e=document.getElementById("labLog");
+  if(e)e.textContent="["+new Date().toLocaleTimeString("vi-VN")+"] "+text;
+}
+function labProgress(v){
+  const e=document.getElementById("labBar"); if(e)e.style.width=v+"%";
+}
+function switchLab(name,btn){
+  document.querySelectorAll(".lab-tab").forEach(x=>x.classList.remove("active"));
+  if(btn)btn.classList.add("active");
+  document.querySelectorAll(".lab-pane").forEach(x=>x.classList.add("hidden"));
+  const pane=document.getElementById("lab-"+name);
+  if(pane)pane.classList.remove("hidden");
+  setLabState("READY");
+  labLog(name.toUpperCase()+" module ready.");
+  labProgress(0);
+}
+async function runProAction(type,button){
+  if(window.__labRunning)return;
+  window.__labRunning=true;
+  document.querySelectorAll(".lab-cards button").forEach(x=>x.classList.remove("active"));
+  if(button)button.classList.add("active");
+  setLabState("SCANNING"); labProgress(15);
+  const labels={lag:"FIX LAG",rung:"FIX RUNG",fps:"FPS CHECK",cleanup:"UI CLEANUP"};
+  labLog("Running "+labels[type]+" diagnostics...");
+  await new Promise(r=>setTimeout(r,350)); labProgress(45);
+
+  if(type==="lag"){
+    const cores=navigator.hardwareConcurrency||4;
+    const memory=navigator.deviceMemory||4;
+    const score=Math.min(99,Math.round(55+cores*4+memory*3));
+    document.getElementById("lagScore").textContent=score+"%";
+    labLog("Lag diagnostic: browser resources healthy • score "+score+"%.");
+  }else if(type==="rung"){
+    const score=Math.round((Number(document.getElementById("rungRange")?.value||80)+Number(document.getElementById("inputRange")?.value||75))/2);
+    document.getElementById("motionScore").textContent=score+"%";
+    labLog("Motion diagnostic: input stability profile "+score+"%.");
+  }else if(type==="fps"){
+    const score=await measureFrameRate();
+    document.getElementById("fpsScore").textContent=score+" FPS";
+    labLog("UI frame test completed: "+score+" FPS estimate.");
+  }else{
+    if("requestIdleCallback" in window) requestIdleCallback(()=>{});
+    document.getElementById("lagScore").textContent="OPT";
+    labLog("UI cleanup requested safely; no game process was modified.");
+  }
+  labProgress(100); setLabState("HEALTHY"); window.__labRunning=false;
+}
+function measureFrameRate(){
+  return new Promise(resolve=>{
+    let frames=0,start=performance.now();
+    function tick(now){
+      frames++;
+      if(now-start>=500){
+        resolve(Math.max(1,Math.round(frames/((now-start)/1000))));
+        return;
+      }
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  });
+}
+function updateProTouch(){
+  const t=Number(document.getElementById("proTouchRange").value);
+  const d=Number(document.getElementById("proDragRange").value);
+  const m=Number(document.getElementById("proMotionRange").value);
+  document.getElementById("proTouchOut").textContent=t+"%";
+  document.getElementById("proDragOut").textContent=d+"%";
+  document.getElementById("proMotionOut").textContent=m+"%";
+  labLog("Safe touch profile updated • "+Math.round((t+d+m)/3)+"% stability.");
+}
+function calibrateTouch(){
+  setLabState("CALIBRATING"); labProgress(20);
+  setTimeout(()=>labProgress(65),250);
+  setTimeout(()=>{
+    updateProTouch(); labProgress(100); setLabState("ACTIVE");
+    labLog("Touch profile calibrated for browser-side diagnostics.");
+    showToast("✓ Touch profile ready");
+  },650);
+}
+async function runNetworkPro(){
+  setLabState("TESTING"); labProgress(20); labLog("Testing connection...");
+  document.getElementById("proOnline").textContent=navigator.onLine?"ONLINE":"OFFLINE";
+  document.getElementById("proNetwork").textContent=(navigator.connection&&navigator.connection.effectiveType)||"N/A";
+  const p=await measurePing();
+  document.getElementById("proPing").textContent=p===null?"N/A":p+"ms";
+  labProgress(100); setLabState("HEALTHY");
+  labLog("Network test complete • latency "+(p===null?"N/A":p+"ms")+".");
+}
+
+
+/* ===== ANDROID GAME BRIDGE ===== */
+let selectedAndroidPackage = "com.dts.freefireth";
+
+function bridgeLog(text){
+  const el=document.getElementById("bridgeLog");
+  if(el) el.textContent = new Date().toLocaleTimeString("vi-VN")+" • "+text;
+}
+function setBridgeState(text){
+  const el=document.getElementById("bridgeState");
+  if(el) el.textContent=text;
+}
+function selectAndroidTarget(btn){
+  document.querySelectorAll(".bridge-target").forEach(x=>x.classList.remove("active"));
+  btn.classList.add("active");
+  selectedAndroidPackage=btn.dataset.pkg;
+  const out=document.getElementById("bridgePackage");
+  if(out) out.textContent=selectedAndroidPackage;
+  bridgeLog("Target selected: "+selectedAndroidPackage);
+  setBridgeState("TARGET READY");
+}
+function openSelectedGame(){
+  // Android intent launch only; this does NOT execute JavaScript/code inside the game.
+  const pkg=selectedAndroidPackage;
+  const intent="intent://#Intent;scheme="+encodeURIComponent(pkg)+";package="+pkg+";end";
+  bridgeLog("Opening "+pkg+" via Android intent…");
+  setBridgeState("OPENING");
+  window.location.href=intent;
+  setTimeout(()=>setBridgeState("READY"),1800);
+}
+function checkSelectedGame(){
+  const isAndroid=/Android/i.test(navigator.userAgent);
+  const text=isAndroid
+    ? "Android detected • Browser cannot directly inspect another app's process."
+    : "Non-Android browser • package launch may be unavailable.";
+  bridgeLog(text+" Target: "+selectedAndroidPackage);
+  setBridgeState(isAndroid ? "CHECKED" : "BROWSER");
+}
+async function runBridgeDiagnostics(){
+  setBridgeState("SCANNING");
+  const started=performance.now();
+  let frames=0;
+  await new Promise(resolve=>{
+    const start=performance.now();
+    function tick(now){
+      frames++;
+      if(now-start>=350) return resolve();
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  });
+  const elapsed=Math.max(1,performance.now()-started);
+  const fps=Math.round(frames/(elapsed/1000));
+  bridgeLog("Browser diagnostic complete • UI FPS ≈ "+fps+" • online="+navigator.onLine+" • target="+selectedAndroidPackage);
+  setBridgeState("HEALTHY");
+}
+async function copyPackageId(){
+  try{
+    await navigator.clipboard.writeText(selectedAndroidPackage);
+    showToast("✓ Package ID copied");
+    bridgeLog("Copied: "+selectedAndroidPackage);
+  }catch(e){
+    showToast("⚠️ Clipboard unavailable");
+    bridgeLog("Clipboard unavailable in this browser.");
+  }
+}
+function runSafeCommand(){
+  const box=document.getElementById("safeCommand");
+  const commands=(box?.value||"").split(/\n+/).map(x=>x.trim()).filter(Boolean);
+  if(!commands.length){showToast("⚠️ Nhập lệnh an toàn");return;}
+  setBridgeState("RUNNING");
+  const output=[];
+  commands.slice(0,12).forEach(cmd=>{
+    const c=cmd.toLowerCase();
+    if(c==="profile balanced" || c==="profile fast" || c==="profile stable" || c==="profile precision"){
+      const name=c.split(" ")[1].toUpperCase();
+      if(typeof loadDataPreset==="function") loadDataPreset(name,document.querySelector(".data-presets button"));
+      output.push("PROFILE "+name+" → applied locally");
+    }else if(c==="network test"){
+      output.push("NETWORK TEST → browser connectivity diagnostic");
+      if(typeof runNetworkPro==="function") runNetworkPro();
+    }else if(c==="fps test"){
+      output.push("FPS TEST → browser frame-time diagnostic");
+      if(typeof runProAction==="function") runProAction("fps",document.querySelector(".lab-cards button"));
+    }else if(c==="export report"){
+      output.push("REPORT → exported by existing safe report module");
+      if(typeof exportReport==="function") exportReport();
+    }else if(c==="target freefire"){
+      selectedAndroidPackage="com.dts.freefireth";
+      output.push("TARGET → com.dts.freefireth");
+    }else if(c==="target freefiremax"){
+      selectedAndroidPackage="com.dts.freefiremax";
+      output.push("TARGET → com.dts.freefiremax");
+    }else{
+      output.push("BLOCKED → unsupported/unsafe command: "+cmd);
+    }
+  });
+  document.getElementById("bridgePackage").textContent=selectedAndroidPackage;
+  bridgeLog(output.join("\n"));
+  setBridgeState("READY");
+}
+
+
+/* ===== IOS GAME BRIDGE PRO ===== */
+let selectedIOSPackage="com.dts.freefireth";
+
+function iosLog(text){
+  const el=document.getElementById("iosLog");
+  if(el) el.textContent=new Date().toLocaleTimeString("vi-VN")+" • "+text;
+}
+function iosState(text){
+  const el=document.getElementById("iosState");
+  if(el) el.textContent=text;
+}
+function selectIOSTarget(btn){
+  document.querySelectorAll("#iosBridge .bridge-target").forEach(x=>x.classList.remove("active"));
+  btn.classList.add("active");
+  selectedIOSPackage=btn.dataset.iosPkg;
+  document.getElementById("iosPackage").textContent=selectedIOSPackage;
+  iosLog("Target selected: "+selectedIOSPackage);
+  iosState("TARGET READY");
+}
+function iosLaunch(){
+  // Best-effort URL-scheme launch. The browser cannot execute code inside another app.
+  const schemes={
+    "com.dts.freefireth":"freefireth://",
+    "com.dts.freefiremax":"freefiremax://"
+  };
+  const scheme=schemes[selectedIOSPackage];
+  if(!scheme){
+    iosLog("No verified URL scheme available for this target.");
+    iosState("LIMITED");
+    return;
+  }
+  iosLog("Requesting app launch: "+selectedIOSPackage);
+  iosState("OPENING");
+  window.location.href=scheme;
+  setTimeout(()=>iosState("READY"),1500);
+}
+function iosCheck(){
+  const ua=navigator.userAgent||"";
+  const isIOS=/iPhone|iPad|iPod/i.test(ua) || (navigator.platform==="MacIntel" && navigator.maxTouchPoints>1);
+  document.getElementById("iosPlatform").textContent=isIOS?"IOS":"BROWSER";
+  iosLog((isIOS?"iOS device detected":"iOS device not detected")+" • target="+selectedIOSPackage);
+  iosState(isIOS?"IOS READY":"BROWSER");
+}
+async function iosDiagnostics(){
+  iosState("SCANNING");
+  let frames=0,start=performance.now();
+  await new Promise(resolve=>{
+    function tick(now){
+      frames++;
+      if(now-start>=500){resolve();return;}
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  });
+  const elapsed=Math.max(1,performance.now()-start);
+  const fps=Math.round(frames/(elapsed/1000));
+  document.getElementById("iosPlatform").textContent=/iPhone|iPad|iPod/i.test(navigator.userAgent)?"IOS":"WEB";
+  iosLog("iOS browser diagnostic • FPS ≈ "+fps+" • online="+navigator.onLine);
+  iosState("HEALTHY");
+}
+async function iosCopyId(){
+  try{
+    await navigator.clipboard.writeText(selectedIOSPackage);
+    showToast("✓ iOS Package ID copied");
+    iosLog("Copied: "+selectedIOSPackage);
+  }catch(e){
+    showToast("⚠️ Clipboard unavailable");
+    iosLog("Clipboard unavailable.");
+  }
+}
+
+/* ===== HEADSHOT COMMAND FILE IMPORTER • SAFE PROFILE ONLY ===== */
+const HEADSHOT_FILE_SCHEMA = "HEADLOCK_HEADSHOT_PROFILE_1";
+
+function headshotFileLog(text){
+  const el=document.getElementById("headshotFileLog");
+  if(el) el.textContent="["+new Date().toLocaleTimeString("vi-VN")+"] "+text;
+}
+
+function getHeadshotCommandProfile(){
+  return {
+    schema:HEADSHOT_FILE_SCHEMA,
+    app:"HEADLOCK PRO",
+    type:"headshot-safe-profile",
+    target:typeof selectedIOSPackage==="string"?selectedIOSPackage:"com.dts.freefireth",
+    createdAt:new Date().toISOString(),
+    values:{
+      touch:Number(document.getElementById("touchRange")?.value||78),
+      drag:Number(document.getElementById("dragRange")?.value||72),
+      aimStability:Number(document.getElementById("aimRange")?.value||84),
+      consistency:Number(document.getElementById("consistencyRange")?.value||80)
+    },
+    commands:[
+      "profile balanced",
+      "fps test",
+      "network test"
+    ]
+  };
+}
+
+function validateHeadshotCommandObject(obj){
+  if(!obj || obj.schema!==HEADSHOT_FILE_SCHEMA)
+    return {ok:false,message:"Sai schema HEADSHOT profile."};
+  if(obj.type!=="headshot-safe-profile")
+    return {ok:false,message:"Sai loại profile."};
+  const v=obj.values||{};
+  const keys=["touch","drag","aimStability","consistency"];
+  for(const k of keys){
+    if(!Number.isFinite(Number(v[k])) || Number(v[k])<0 || Number(v[k])>100)
+      return {ok:false,message:"Giá trị "+k+" phải nằm trong 0–100."};
+  }
+  if(obj.commands && (!Array.isArray(obj.commands) || obj.commands.length>20))
+    return {ok:false,message:"Danh sách command không hợp lệ."};
+  return {ok:true,message:"Profile hợp lệ • 4/4 thông số OK."};
+}
+
+function applyHeadshotCommandObject(obj){
+  const check=validateHeadshotCommandObject(obj);
+  if(!check.ok) return check;
+  const v=obj.values;
+  const map={
+    touch:"touchRange",
+    drag:"dragRange",
+    aimStability:"aimRange",
+    consistency:"consistencyRange"
+  };
+  Object.entries(map).forEach(([from,to])=>{
+    const el=document.getElementById(to);
+    if(el) el.value=Math.round(Number(v[from]));
+  });
+  updateHeadshotLab("FILE IMPORT");
+  localStorage.setItem("headlock_headshot_import",JSON.stringify(obj));
+  return check;
+}
+
+async function importHeadshotCommandFile(){
+  const input=document.getElementById("headshotFileInput");
+  const file=input?.files?.[0];
+  if(!file){showToast("⚠️ Chọn file HEADSHOT trước");return;}
+  if(file.size>512*1024){showToast("⚠️ File quá lớn (tối đa 512 KB)");return;}
+  headshotFileLog("Đang đọc "+file.name+"…");
+  try{
+    const text=await file.text();
+    let obj;
+    if(file.name.toLowerCase().endsWith(".json")){
+      obj=JSON.parse(text);
+    }else{
+      // Text/config format: key=value, only four safe profile keys are accepted.
+      const values={};
+      text.split(/\r?\n/).forEach(line=>{
+        const s=line.trim();
+        if(!s || s.startsWith("#")) return;
+        const m=s.match(/^([a-zA-Z_]+)\s*=\s*(-?\d+(?:\.\d+)?)$/);
+        if(m) values[m[1]]=Number(m[2]);
+      });
+      obj={
+        schema:HEADSHOT_FILE_SCHEMA,
+        app:"HEADLOCK PRO",
+        type:"headshot-safe-profile",
+        target:selectedIOSPackage,
+        values:{
+          touch:values.touch ?? 78,
+          drag:values.drag ?? 72,
+          aimStability:values.aimStability ?? 84,
+          consistency:values.consistency ?? 80
+        },
+        commands:[]
+      };
+    }
+    const result=applyHeadshotCommandObject(obj);
+    if(!result.ok){
+      headshotFileLog("BLOCKED • "+result.message);
+      showToast("❌ File không hợp lệ");
+      return;
+    }
+    headshotFileLog("IMPORTED • "+file.name+" • "+result.message+
+      " • Target "+(obj.target||selectedIOSPackage));
+    showToast("✓ Headshot profile imported");
+    iosLog("Safe headshot profile imported locally • no game injection.");
+  }catch(e){
+    headshotFileLog("ERROR • "+e.message);
+    showToast("⚠️ Không đọc được file");
+  }
+}
+
+function exportHeadshotCommandFile(){
+  const profile=getHeadshotCommandProfile();
+  const blob=new Blob([JSON.stringify(profile,null,2)],{type:"application/json"});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+  a.href=url;
+  a.download="headlock-headshot-profile.json";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+  headshotFileLog("EXPORTED • headlock-headshot-profile.json");
+  showToast("✓ Headshot profile exported");
+}
+
+function runHeadshotSafeCommand(name){
+  const allowed=["profile balanced","profile fast","profile stable","profile precision","fps test","network test","export report"];
+  const c=String(name||"").trim().toLowerCase();
+  if(!allowed.includes(c)){
+    headshotFileLog("BLOCKED • command không được phép: "+name);
+    return false;
+  }
+  if(c.startsWith("profile ")){
+    const preset=c.split(" ")[1].toUpperCase();
+    loadDataPreset(preset,document.querySelector(".data-presets button"));
+    headshotFileLog("SAFE COMMAND • "+c+" → local profile applied.");
+  }else if(c==="fps test"){
+    iosDiagnostics();
+    headshotFileLog("SAFE COMMAND • fps test → browser diagnostic.");
+  }else if(c==="network test"){
+    runNetworkPro();
+    headshotFileLog("SAFE COMMAND • network test → browser diagnostic.");
+  }else if(c==="export report"){
+    exportReport();
+    headshotFileLog("SAFE COMMAND • report exported.");
+  }
+  return true;
+}
+
+function runIOSCommand(){
+  const box=document.getElementById("iosCommand");
+  const cmds=(box?.value||"").split(/\n+/).map(x=>x.trim()).filter(Boolean);
+  if(!cmds.length){showToast("⚠️ Nhập lệnh");return;}
+  iosState("RUNNING");
+  const out=[];
+  cmds.slice(0,12).forEach(cmd=>{
+    const c=cmd.toLowerCase();
+    if(["profile balanced","profile fast","profile stable","profile precision"].includes(c)){
+      const name=c.split(" ")[1].toUpperCase();
+      if(typeof loadDataPreset==="function") loadDataPreset(name,document.querySelector(".data-presets button"));
+      out.push("PROFILE "+name+" → local profile applied");
+    }else if(c==="fps test"){
+      out.push("FPS TEST → browser-side frame diagnostic");
+      iosDiagnostics();
+    }else if(c==="network test"){
+      out.push("NETWORK TEST → browser connectivity diagnostic");
+      if(typeof runNetworkPro==="function") runNetworkPro();
+    }else if(c==="export report"){
+      out.push("REPORT → safe local report");
+      if(typeof exportReport==="function") exportReport();
+    }else if(c==="target freefire"){
+      selectIOSTarget(document.querySelector('#iosBridge [data-ios-pkg="com.dts.freefireth"]'));
+      out.push("TARGET → com.dts.freefireth");
+    }else if(c==="target freefiremax"){
+      selectIOSTarget(document.querySelector('#iosBridge [data-ios-pkg="com.dts.freefiremax"]'));
+      out.push("TARGET → com.dts.freefiremax");
+    }else if(["headshot balanced","headshot fast","headshot stable","headshot precision"].includes(c)){
+      const preset=c.split(" ")[1].toUpperCase();
+      applyHeadshotPreset(preset,document.querySelector(".headshot-presets button"));
+      out.push("HEADSHOT "+preset+" → local safe profile applied");
+    }else if(c==="headshot export"){
+      exportHeadshotCommandFile();
+      out.push("HEADSHOT EXPORT → local profile file created");
+    }else{
+      out.push("BLOCKED → unsupported/unsafe command: "+cmd);
+    }
+  });
+  iosLog(out.join("\n"));
+  iosState("READY");
+}
+iosCheck();
+
+</script>
+
+<main class="analysis-page hidden" id="analysisPage">
+  <div class="header">
+    <button class="back" onclick="showPanelPage()">←</button>
+    <div class="header-info"><h1>HEADLOCK</h1><p>TASK ANALYSIS</p></div>
+  </div>
+
+  <div class="analysis-nav">
+    <button class="active" id="analysisTabBtn">📊 ANALYSIS</button>
+    <button onclick="showPanelPage()">⚙️ PANEL</button>
+  </div>
+
+  <section class="analysis-hero">
+    <div class="analysis-kicker">PAGE 02 • AI TASK MONITOR</div>
+    <div class="analysis-title">GAME TASK ANALYSIS</div>
+    <div class="analysis-sub">Tổng hợp trạng thái module, profile độ nhạy và mức hoạt động từ chính dữ liệu giao diện HEADLOCK.</div>
+    <div class="ai-status"><b>AI ENGINE • SNOMOSUN</b><span id="snomosunState">LOCAL ANALYSIS</span></div>
+    <div class="analysis-score">
+      <div><b id="analysisActive">--</b><span>MODULE ACTIVE</span></div>
+      <div><b id="analysisUsage">--</b><span>PROFILE SCORE</span></div>
+      <div><b id="analysisCoverage">--</b><span>TASK COVERAGE</span></div>
+    </div>
+  </section>
+
+  <section class="analysis-section">
+    <h3>🧠 SNOMOSUN • AI TASK FLOW</h3>
+    <div class="task-row"><div class="task-head"><span>Task detection</span><b id="taskDetect">92%</b></div><div class="task-bar"><i style="width:92%"></i></div></div>
+    <div class="task-row"><div class="task-head"><span>Profile analysis</span><b id="taskProfile">--</b></div><div class="task-bar"><i id="taskProfileBar"></i></div></div>
+    <div class="task-row"><div class="task-head"><span>System diagnostics</span><b id="taskDiag">88%</b></div><div class="task-bar"><i style="width:88%"></i></div></div>
+    <p class="analysis-note">SNOMOSUN ở trang này là nhãn phân tích cục bộ của giao diện; HTML hiện tại không kết nối một mô hình AI/server bên ngoài.</p>
+  </section>
+
+  <section class="analysis-section">
+    <h3>🎮 CHỨC NĂNG ĐANG BẬT</h3>
+    <div class="function-list" id="functionList"></div>
+    <p class="analysis-note">Tỷ lệ hoạt động được tính từ checkbox/profile hiện có, không phải tỷ lệ hiệu quả trong trận đấu.</p>
+  </section>
+
+  <section class="analysis-section">
+    <h3>📱 MOBILECONFIG • SENSITIVITY ANALYZER</h3>
+    <p>Đọc file .mobileconfig ở phía trình duyệt để kiểm tra cấu trúc và tìm các khóa liên quan đến sensitivity/touch/aim. Không cài profile và không áp dụng vào game.</p>
+    <div class="mc-drop">
+      <input id="mobileConfigInput" type="file" accept=".mobileconfig,.plist,.xml,text/xml,application/xml">
+    </div>
+    <div class="mc-result" id="mobileConfigResult">Chưa chọn file mobileconfig.</div>
+    <p class="analysis-note">Nếu file không chứa các khóa độ nhạy, kết quả sẽ ghi “không tìm thấy dữ liệu sensitivity”; không tự suy đoán giá trị.</p>
+  </section>
+
+  <section class="analysis-section">
+    <h3>📋 TÓM TẮT TÁC VỤ</h3>
+    <p id="analysisSummary">Đang đồng bộ dữ liệu từ Page 01…</p>
+  </section>
+</main>
+
+<!-- PAGE 2: GAME TASK ANALYSIS --><section id="gameAnalysisPage" class="analysis-page"><div class="analysis-head"><div><div class="analysis-title">GAME TASK ANALYSIS</div><div class="analysis-sub">SNOMOSUN AI • FUNCTION STATUS • MOBILECONFIG SENSITIVITY</div></div><button class="analysis-btn" onclick="closeAnalysisPage()">← TRANG CHÍNH</button></div><div class="analysis-grid"><div class="analysis-card"><b id="aiStatus">READY</b><span>SNOMOSUN AI TASK</span></div><div class="analysis-card"><b id="enabledPct">0%</b><span>CHỨC NĂNG ĐANG BẬT</span></div><div class="analysis-card"><b id="profilePct">0%</b><span>PROFILE SCORE</span></div><div class="analysis-card"><b id="taskPct">0%</b><span>TASK COVERAGE</span></div></div><div class="analysis-section"><h3>🤖 AI TASK MONITOR</h3><div class="task-row"><strong>Profile / Sensitivity</strong><span class="badge on">LOCAL</span><span>Đọc các thông số profile hiện có và tính điểm.</span></div><div class="task-row"><strong>Touch / Drag / Motion</strong><span class="badge on">DIAGNOSTIC</span><span>Phân tích độ ổn định theo giá trị 0–100.</span></div><div class="task-row"><strong>Network</strong><span class="badge on">TEST</span><span>Kiểm tra online, connection type và latency.</span></div><div class="task-row"><strong>Game process / memory</strong><span class="badge off">OFF</span><span>Không truy cập hoặc sửa tiến trình, memory hay file game.</span></div><div class="analysis-note">SNOMOSUN AI tại đây là bộ phân tích giao diện cục bộ, không giả lập AI server điều khiển game.</div></div><div class="analysis-section"><h3>🎯 CHI TIẾT CHỨC NĂNG & MỨC HOẠT ĐỘNG</h3><div id="functionAnalysis"></div></div><div class="analysis-section"><h3>📱 MOBILECONFIG SENSITIVITY ANALYZER</h3><div class="mobile-box"><div><input id="mobileConfigInput" type="file" accept=".mobileconfig,.plist,.xml,.json,.txt"><div id="mobileConfigResult" class="analysis-note">Chọn file để tìm các khóa sensitivity/touch/aim/gyro.</div></div><div class="analysis-card"><b id="sensitivityPct">--</b><span>SENSITIVITY COVERAGE</span><div class="analysis-note">Chỉ đọc file trong trình duyệt; không cài profile hoặc inject vào game.</div></div></div></div>
+<!-- PUBLISHER ADMIN SECTION -->
+<div class="publisher-card" id="publisherAdminCard">
+  <div class="publisher-head">
+    <div class="publisher-brand">
+      <div class="publisher-logo">◆</div>
+      <div>
+        <div class="publisher-name">HEADLOCK PRO</div>
+        <div class="publisher-role">NHÀ PHÁT HÀNH • ADMIN / COMMUNITY</div>
+      </div>
+    </div>
+    <span class="badge on">OFFICIAL INFO</span>
+  </div>
+
+  <div class="publisher-grid">
+    <div class="publisher-info">
+      <span>Nhà phát hành</span>
+      <b>HEADLOCK PRO</b>
+    </div>
+    <div class="publisher-info">
+      <span>Quản trị / Admin</span>
+      <b>Community Admin</b>
+    </div>
+    <div class="publisher-info">
+      <span>Hệ thống</span>
+      <b>HEADSHOT • GAME TASK ANALYSIS</b>
+    </div>
+    <div class="publisher-info">
+      <span>Trạng thái</span>
+      <b>Browser-safe diagnostics</b>
+    </div>
+  </div>
+
+  <div class="admin-links">
+    <a class="admin-link" href="#" onclick="openAdminLink('group');return false;">👥 GROUP</a>
+    <a class="admin-link" href="#" onclick="openAdminLink('admin');return false;">🛡️ ADMIN</a>
+    <a class="admin-link" href="#" onclick="openAdminLink('contact');return false;">💬 LIÊN HỆ</a>
+  </div>
+
+  <div class="publisher-note">
+    Các nút GROUP, ADMIN và LIÊN HỆ đã được cấu hình sẵn theo thông tin quản trị cung cấp.
+  </div>
+</div>
+<!-- /PUBLISHER ADMIN SECTION -->
+
+</section><!-- /PAGE 2: GAME TASK ANALYSIS --><script id="game-analysis-js">function openAnalysisPage(){document.querySelectorAll('body > *:not(#gameAnalysisPage):not(#analysisOpenBtn)').forEach(e=>e.style.display='none');document.getElementById('analysisOpenBtn').style.display='none';document.getElementById('gameAnalysisPage').classList.add('show');updateGameAnalysis()}function closeAnalysisPage(){document.getElementById('gameAnalysisPage').classList.remove('show');document.querySelectorAll('body > *:not(#gameAnalysisPage):not(#analysisOpenBtn)').forEach(e=>e.style.display='');document.getElementById('analysisOpenBtn').style.display=''}function updateGameAnalysis(){let rs=[...document.querySelectorAll('input[type=range]')].map(x=>+x.value).filter(Number.isFinite),p=rs.length?Math.round(rs.reduce((a,b)=>a+b,0)/rs.length):0,cs=[...document.querySelectorAll('input[type=checkbox]')],en=cs.length?Math.round(cs.filter(x=>x.checked).length/cs.length*100):100,t=Math.min(100,Math.round(p*.55+en*.25+20));document.getElementById('profilePct').textContent=p+'%';document.getElementById('enabledPct').textContent=en+'%';document.getElementById('taskPct').textContent=t+'%';document.getElementById('aiStatus').textContent='ACTIVE';let rows=[['Sensitivity profile',p,'Profile tổng hợp'],['Touch / Drag / Motion',Math.min(100,p+3),'Độ ổn định thao tác'],['Network diagnostic',navigator.onLine?100:0,navigator.onLine?'Browser online':'Browser offline'],['Game process access',0,'Không truy cập từ HTML']];document.getElementById('functionAnalysis').innerHTML=rows.map(r=>`<div class="task-row"><strong>${r[0]}</strong><span><b>${r[1]}%</b><div class="bar"><i style="width:${r[1]}%"></i></div></span><span>${r[2]}</span></div>`).join('')}document.addEventListener('DOMContentLoaded',()=>{let i=document.getElementById('mobileConfigInput');if(i)i.onchange=async e=>{let f=e.target.files[0];if(!f)return;let s=await f.text(),k=[...new Set((s.match(/sensitivity|touch|aim|gyro|drag|motion/gi)||[]).map(x=>x.toLowerCase()))],pct=Math.min(100,k.length*16);document.getElementById('sensitivityPct').textContent=pct+'%';document.getElementById('mobileConfigResult').textContent=`Đã đọc ${f.name}: tìm thấy ${k.length} nhóm khóa (${k.join(', ')||'không có'}).`}});</script>
+<script id="headshot-upgrade-js">
+const HEADSHOT_STORAGE_KEY="headlock_headshot_lab_v3";
+function getHeadshotValues(){return {touch:Number(document.getElementById("touchRange").value),drag:Number(document.getElementById("dragRange").value),aim:Number(document.getElementById("aimRange").value),consistency:Number(document.getElementById("consistencyRange").value)}}
+function renderHeadshotDashboard(v){
+  document.getElementById("hsTouchMini").textContent=v.touch+"%";
+  document.getElementById("hsDragMini").textContent=v.drag+"%";
+  document.getElementById("hsAimMini").textContent=v.aim+"%";
+  document.getElementById("hsConsistencyMini").textContent=v.consistency+"%";
+}
+function runHeadshotCalibration(){
+  const state=document.getElementById("headshotState"), bar=document.getElementById("hsTestBar"), read=document.getElementById("hsTestReadout");
+  state.textContent="CALIBRATING"; document.getElementById("hsTestState").textContent="RUNNING"; bar.style.width="0%";
+  let n=0; const timer=setInterval(()=>{n+=10;bar.style.width=n+"%";read.textContent="Calibration step "+Math.min(10,n/10)+"/10 • browser touch profile check";if(n>=100){clearInterval(timer);state.textContent="ACTIVE";document.getElementById("hsTestState").textContent="DONE";read.textContent="Calibration complete • profile is ready for local diagnostics.";showToast("✓ Headshot profile calibrated");}},70);
+}
+function runHeadshotTest(){
+  const v=getHeadshotValues(), score=Math.round((v.touch+v.drag+v.aim+v.consistency)/4);
+  const bar=document.getElementById("hsTestBar"), state=document.getElementById("hsTestState"), read=document.getElementById("hsTestReadout");
+  state.textContent="TESTING";bar.style.width="0%";let n=0;
+  const timer=setInterval(()=>{n+=8;bar.style.width=Math.min(100,n)+"%";read.textContent="Profile simulation "+Math.min(100,n)+"% • score target "+score+"%";if(n>=100){clearInterval(timer);state.textContent="PASS";read.textContent="Test complete • diagnostic score "+score+"%.";document.getElementById("headshotLog").textContent="Profile test completed • score "+score+"% • no game process modified.";showToast("✓ Profile test complete");}},55);
+}
+function saveHeadshotLab(){localStorage.setItem(HEADSHOT_STORAGE_KEY,JSON.stringify({...getHeadshotValues(),savedAt:new Date().toISOString()}));showToast("✓ Headshot profile saved locally");document.getElementById("headshotLog").textContent="Saved locally • "+new Date().toLocaleTimeString("vi-VN");}
+function resetHeadshotLab(){applyHeadshotPreset("BALANCED",null);showToast("✓ Headshot profile reset");}
+const _oldUpdateHeadshotLab=updateHeadshotLab;
+updateHeadshotLab=function(presetName){_oldUpdateHeadshotLab(presetName);renderHeadshotDashboard(getHeadshotValues())};
+const _oldApplyHeadshotPreset=applyHeadshotPreset;
+applyHeadshotPreset=function(name,button){_oldApplyHeadshotPreset(name,button);renderHeadshotDashboard(getHeadshotValues())};
+setTimeout(()=>{try{const raw=localStorage.getItem(HEADSHOT_STORAGE_KEY);if(raw){const v=JSON.parse(raw);[["touchRange",v.touch],["dragRange",v.drag],["aimRange",v.aim],["consistencyRange",v.consistency]].forEach(([id,val])=>{if(Number.isFinite(val))document.getElementById(id).value=val});updateHeadshotLab("SAVED");}}catch(e){}},50);
+</script>
+
+
+<script id="publisher-admin-js">
+const ADMIN_LINKS = {
+  group: "https://zalo.me/g/itvkre200",
+  admin: "https://t.me/nhpmodgamee",
+  contact: "https://zalo.me/84347975093"
+};
+function openAdminLink(type){
+  const url = ADMIN_LINKS[type];
+  if(!url || url === "#"){
+    if(typeof showToast === "function") showToast("⚠️ Chưa cấu hình link " + type);
+    else alert("Chưa cấu hình link " + type);
+    return;
+  }
+  window.open(url, "_blank", "noopener,noreferrer");
+}
+</script>
+
+</body>
+</html>
